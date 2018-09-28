@@ -128,25 +128,25 @@ namespace GameInit
 			SetExitKey(0);
 			if (IsKeyDown(KEY_LEFT)) player.rotation -= 300 * GetFrameTime();
 			if (IsKeyDown(KEY_RIGHT)) player.rotation += 300 * GetFrameTime();
-			player.speed.x = sin(player.rotation*DEG2RAD)*PLAYER_SPEED*GetFrameTime();
-			player.speed.y = cos(player.rotation*DEG2RAD)*PLAYER_SPEED*GetFrameTime();
+			player.speed.x = sin(player.rotation*DEG2RAD);
+			player.speed.y = cos(player.rotation*DEG2RAD);
 			if (IsKeyDown(KEY_UP))
 			{
-				if (player.acceleration < 1) player.acceleration += 300 *GetFrameTime();
+				if (player.acceleration < 1) player.acceleration += 300;
 			}
 			else
 			{
-				if (player.acceleration > 0) player.acceleration -= 150 * GetFrameTime();
+				if (player.acceleration > 0) player.acceleration -= 150;
 				else if (player.acceleration < 0) player.acceleration = 0;
 			}
 			if (IsKeyDown(KEY_DOWN))
 			{
-				if (player.acceleration > 0) player.acceleration -= 300 * GetFrameTime();
+				if (player.acceleration > 0) player.acceleration -= 300 ;
 				else if (player.acceleration < 0) player.acceleration = 0;
 			}
 			
-			player.position.x += (player.speed.x*player.acceleration);
-			player.position.y -= (player.speed.y*player.acceleration);
+			player.position.x += (player.speed.x*player.acceleration)* GetFrameTime();
+			player.position.y -= (player.speed.y*player.acceleration)* GetFrameTime();
 			if (player.position.x > screenWidth + shipHeight) player.position.x = -(shipHeight);
 			else if (player.position.x < -(shipHeight)) player.position.x = screenWidth + shipHeight;
 			if (player.position.y >(screenHeight + shipHeight)) player.position.y = -(shipHeight);
@@ -204,7 +204,7 @@ namespace GameInit
 				if (shoot[i].active) shoot[i].lifeSpawn++;
 			}
 
-			// Shot logic
+			// Shoot logic
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 			{
 				if (shoot[i].active)
