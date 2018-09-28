@@ -1,0 +1,53 @@
+﻿  game.cpp
+  main.cpp
+  credits.cpp
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\credits\credits.cpp(27): warning C4244: '-=': conversión de 'float' a 'int'; posible pérdida de datos
+  gameplay.cpp
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(194): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(195): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(270): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(271): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(283): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(295): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(326): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(392): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(393): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(396): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(397): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(400): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(401): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(404): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\administrador\desktop\repositorio asteroids\asteroids\src\screen\gameplay\gameplay.cpp(405): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+  menu.cpp
+  win.cpp
+  Generando código...
+raylib.lib(core.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(core.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(shapes.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(shapes.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(text.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(text.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(textures.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(textures.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(utils.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(context.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(context.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(init.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(init.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(input.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(input.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(monitor.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(monitor.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(vulkan.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(vulkan.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(window.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(window.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(win32_init.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(win32_init.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(win32_joystick.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(win32_joystick.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(win32_monitor.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(win32_monitor.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(win32_time.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(win32_time.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(win32_thread.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(win32_thread.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(win32_window.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(win32_window.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(wgl_context.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(wgl_context.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(egl_context.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(egl_context.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(osmesa_context.obj) : warning LNK4099: no se encontró PDB 'glfw_objlib.pdb' con 'raylib.lib(osmesa_context.obj)' o en 'C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\glfw_objlib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Pong_Project.vcxproj -> C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\Asteroid_Project.exe
+  Ya existe el subdirectorio o el archivo C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\bin\Debug\res.
+  C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\res\2.wav
+  C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\res\Blip_Select.wav
+  C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\res\Blip_Select2.wav
+  C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\res\Blip_Select3.wav
+  C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\res\Blip_Select4.wav
+  C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\res\menusong.ogg
+  C:\Users\Administrador\Desktop\Repositorio Asteroids\Asteroids\res\music.ogg
+  7 archivo(s) copiado(s)
