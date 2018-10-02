@@ -10,9 +10,6 @@
     <Filter Include="Screen\Win">
       <UniqueIdentifier>{6011e79c-a138-454c-b89f-fe4d311a5d25}</UniqueIdentifier>
     </Filter>
-    <Filter Include="main">
-      <UniqueIdentifier>{188fa075-1e7e-4acd-9936-b8b3674b7678}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Screen\Credits">
       <UniqueIdentifier>{82225e1f-3b1f-476a-9aaa-2f01d9eba15b}</UniqueIdentifier>
     </Filter>
@@ -24,9 +21,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\main\main.cpp">
-      <Filter>main</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\screen\Menu\menu.cpp">
       <Filter>Screen\Menu</Filter>
     </ClCompile>
@@ -42,6 +36,7 @@
     <ClCompile Include="..\src\screen\Gameplay\gameplay.cpp">
       <Filter>Screen\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\screen\Menu\menu.h">

@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Game\game.cpp" />
-    <ClCompile Include="..\src\main\main.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\screen\Credits\credits.cpp" />
     <ClCompile Include="..\src\screen\Gameplay\gameplay.cpp" />
     <ClCompile Include="..\src\screen\Menu\menu.cpp" />
