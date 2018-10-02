@@ -15,7 +15,6 @@ namespace GameInit
 	static void Close();
 	Texture2D texture;
 	Music MusicLoop;
-	int pop = 0;
 	void Init() {
 		InitWindow(Gameplay::screenWidth, Gameplay::screenHeight, "Asteroids");
 #ifdef MUSIC_ON
