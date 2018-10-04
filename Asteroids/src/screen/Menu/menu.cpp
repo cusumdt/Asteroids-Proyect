@@ -41,7 +41,7 @@ namespace GameInit
 			DrawText("Press H to Help", Gameplay::screenWidth / 2 - (MeasureText("Press H To Help", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize * 2 + 5, fontSize, WHITE);
 			DrawText("Press C to Credits", Gameplay::screenWidth / 2 - (MeasureText("Press C to Credits", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize * 3 + 5, fontSize, WHITE);
 			DrawText("Press Escape To Quit", Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize + 5, fontSize, WHITE);
-			DrawText("v1.0", Gameplay::screenWidth / 2 - (MeasureText("v1.0", 25) / 2), Gameplay::screenHeight - Gameplay::screenHeight / 20, 25, BLACK);
+			DrawText("v0.4", Gameplay::screenWidth / 2 - (MeasureText("v1.0", 25) / 2), Gameplay::screenHeight - Gameplay::screenHeight / 20, 25, BLACK);
 			if (settings)
 			{
 				DrawRectangle(Gameplay::screenWidth / 2 - (MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) / 2) - 5, Gameplay::screenHeight - Gameplay::screenHeight / 3, MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) + 10, fontSize * 3 + 15, LIGHTGRAY);

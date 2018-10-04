@@ -5,10 +5,10 @@
 #include "gameplay.h"
 #include <ctime>
 #include <iostream>
-
+//#define MUSIC_ON
 namespace GameInit
 {
-	Screen screen = MENU;
+	Screen screen = MENU; 
 	namespace Gameplay
 	{
 		enum Direction 
@@ -62,17 +62,19 @@ namespace GameInit
 		static void movMeteor(Meteor meteor[]);
 		static void instanceThisMeteor(Meteor meteor[], int thisMeteor);
 		static void initShoot(Shoot shoot[]);
+		static void victory();
+		static void defeat();
 		// Initialization
 		//-------------------------------------------- Statics
 		int screenWidth = 1600;
 		int screenHeight = 900;
 		static int checkGame = 1;
-		static const int TOTAL_METEOR = 15;
+		static const int TOTAL_METEOR = 10;
 		static Rectangle box2;
 		static Meteor meteor[TOTAL_METEOR];
 		static short int INIT_VELOCITY = 400;
 		static short int randomMusic = 0;
-		static const short int MAX_POINT = 10;
+		static const short int MAX_POINT = 1;
 		static const short int HEIGHT_BOX = (screenHeight /15);
 		static const short int WIDTH_BOX = (screenWidth / 25);
 		static const short int RADIUS_BALL = (screenWidth / 45);
@@ -81,18 +83,18 @@ namespace GameInit
 		static const short int INIT_SCORE = 0;
 		static const short int LIMIT_TOP = 10;
 		static const short int EXTRA_VELOCITY = 20;
-		static const short int PLAYER_MAX_SHOOTS = 1000;
+		static const short int PLAYER_MAX_SHOOTS = 10;
 		static Sound fxWav;
 		static Sound fxWav2;
 		static Sound fxWav3;
 		static Sound fxWav4;
-		static int scoreBox1 = INIT_SCORE;
 		static int velocity = INIT_VELOCITY;
 		static Player player;
 		static float shipHeight;
 		static const float PLAYER_BASE_SIZE = 20.0f;
 		static const float PLAYER_SPEED = 300.0f;
 		static Shoot shoot[PLAYER_MAX_SHOOTS];
+		static short int points = 0;
 		//--------------------------------------------
 	
 		bool left = false;
@@ -124,7 +126,7 @@ namespace GameInit
 		
 		void updateGame()
 		{
-	
+			victory();
 			SetExitKey(0);
 			if (IsKeyDown(KEY_LEFT)) player.rotation -= 300 * GetFrameTime();
 			if (IsKeyDown(KEY_RIGHT)) player.rotation += 300 * GetFrameTime();
@@ -156,8 +158,9 @@ namespace GameInit
 			{
 				screen = MENU;
 				initMeteor(meteor);
-				scoreBox1 = INIT_SCORE;
-				velocity = INIT_VELOCITY;
+				points = INIT_SCORE;
+				player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
+				player.rotation = 0;
 			}
 			//---------------------------------------------------------
 			//Meteor Movement
@@ -201,7 +204,10 @@ namespace GameInit
 			// Shoot life timer
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 			{
-				if (shoot[i].active) shoot[i].lifeSpawn++;
+				if (shoot[i].active) 
+				{
+					 shoot[i].lifeSpawn += 1 * GetFrameTime();
+				}
 			}
 
 			// Shoot logic
@@ -259,7 +265,7 @@ namespace GameInit
 				if (shoot[i].active) DrawCircleV(shoot[i].position, shoot[i].radius, BLACK);
 			}
 
-			DrawText(FormatText("%01i", scoreBox1), (screenWidth / 2) - 20, screenHeight / 20, 30, LIGHTGRAY);
+			DrawText(FormatText("%01i", points), (screenWidth / 2) - 20, screenHeight / 20, 30, LIGHTGRAY);
 
 			DrawText("PRESS M FOR RETURN TO THE MENU",	screenWidth / 2 - (MeasureText("PRESS M FOR RETURN TO THE MENU",15) / 2), screenHeight - screenHeight / 20 , 15, BLACK);
 		}
@@ -294,9 +300,15 @@ namespace GameInit
 					{
 						if (meteor[a].active && CheckCollisionCircles(shoot[i].position, shoot[i].radius, meteor[a].position, meteor[a].radius))
 						{
-							shoot[i].active = false;
+							for (int x = 0; x < PLAYER_MAX_SHOOTS; x++)
+							{
+								shoot[x].active = false;
+							}
+							i = PLAYER_MAX_SHOOTS;
+							points++;
 							shoot[i].lifeSpawn = 0;
 							instanceThisMeteor(meteor, a);
+						
 #ifdef MUSIC_ON
 							randomMusic = GetRandomValue(1, 4);
 							switch (randomMusic) {
@@ -327,6 +339,7 @@ namespace GameInit
 				{
 					instanceThisMeteor(meteor, i);
 #ifdef MUSIC_ON
+
 					randomMusic = GetRandomValue(1, 4);
 					switch (randomMusic) {
 					case 1:
@@ -343,6 +356,7 @@ namespace GameInit
 						break;
 					}
 #endif
+					defeat();
 				}
 			}
 		}
@@ -418,6 +432,26 @@ namespace GameInit
 				shoot[i].lifeSpawn = 0;
 				shoot[i].color = WHITE;
 			}
+		}
+		static void victory() 
+		{
+			if (points >= MAX_POINT) 
+			{
+				screen = WIN;
+				initMeteor(meteor);
+				points = INIT_SCORE;
+				player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
+				player.rotation = 0;
+			}
+		}
+		static void defeat()
+		{
+				screen = DEFEAT;
+				initMeteor(meteor);
+				points = INIT_SCORE;
+				player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
+				player.rotation = 0;
+			
 		}
 	}
 

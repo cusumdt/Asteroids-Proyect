@@ -7,7 +7,8 @@ namespace GameInit
 		GAME,
 		MENU,
 		WIN,
-		CREDITS
+		CREDITS,
+		DEFEAT
 	};
 	extern Screen screen;
 

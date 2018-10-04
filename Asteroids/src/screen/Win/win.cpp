@@ -14,7 +14,7 @@ namespace GameInit
 			}
 			SetExitKey(KEY_ESCAPE);
 		}
-		void DrawWin(bool left, bool right)
+		void DrawWin()
 		{
 			static int fontSizeTitle = 50;
 			static int fontSize = 20;
@@ -24,8 +24,8 @@ namespace GameInit
 				fontSizeTitle = 100;
 
 			}
-			if (left) DrawText("Left Player Win,Congrats!", Gameplay::screenWidth / 2 - (MeasureText("Left Player Win,Congrats!", fontSizeTitle) / 2), Gameplay::screenHeight / 5, fontSizeTitle, GOLD);
-			else if (right) DrawText("Right Player Win,Congrats!", Gameplay::screenWidth / 2 - (MeasureText("Right Player Win,Congrats!", fontSizeTitle) / 2), Gameplay::screenHeight / 5, fontSizeTitle, GOLD);
+			
+			DrawText("You Win,Congrats!", Gameplay::screenWidth / 2 - (MeasureText("You Win,Congrats!", fontSizeTitle) / 2), Gameplay::screenHeight / 5, fontSizeTitle, GOLD);
 			DrawRectangle(Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press Escape To Quit", fontSize) + 10, fontSize * 2 + 10, LIGHTGRAY);
 			DrawRectangleLines(Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press Escape To Quit", fontSize) + 10, fontSize * 2 + 10, GOLD);
 			DrawText("Press Space To Play", Gameplay::screenWidth / 2 - (MeasureText("Press Space To Play", fontSize) / 2), Gameplay::screenHeight / 3 + 5, fontSize, WHITE);

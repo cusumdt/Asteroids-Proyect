@@ -19,6 +19,9 @@
     <Filter Include="Screen\Gameplay">
       <UniqueIdentifier>{470d2143-8fd3-4d82-9926-d88ff2cadb48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Defeat">
+      <UniqueIdentifier>{3c57102f-e64f-4b03-828f-6ccf2329b3d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\screen\Menu\menu.cpp">
@@ -37,6 +40,9 @@
       <Filter>Screen\Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\screen\Defeat\defeat.cpp">
+      <Filter>Defeat</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\screen\Menu\menu.h">
@@ -53,6 +59,9 @@
     </ClInclude>
     <ClInclude Include="..\src\screen\Gameplay\gameplay.h">
       <Filter>Screen\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\screen\Defeat\defeat.h">
+      <Filter>Defeat</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

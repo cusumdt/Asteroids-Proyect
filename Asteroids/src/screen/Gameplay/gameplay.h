@@ -12,7 +12,6 @@ namespace GameInit
 		void initGame();
 		void updateGame();
 		void DrawGame();
-		void closeAudio();
 	}
 }
 #endif

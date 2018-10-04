@@ -36,7 +36,7 @@ namespace GameInit
 			DrawText("Programmer: Cusumano Cristian", Gameplay::screenWidth / 2 - (MeasureText("Programmer: Cusumano Cristian", fontSize) / 2), positionY , fontSize, GOLD);
 			DrawText("Music and Efects By: Cusumano Cristian", Gameplay::screenWidth / 2 - (MeasureText("Music and Efects By: Cusumano Cristian", fontSize) / 2), positionY + fontSize*2 + 5, fontSize, GOLD);
 			DrawText("Tools: Raylib - BoscaCeoil - MusicMaker", Gameplay::screenWidth / 2 - (MeasureText("Tools: Raylib - BoscaCeoil - MusicMaker", fontSize) / 2), positionY + fontSize * 4 + 5, fontSize, GOLD);
-			DrawText("v1.0", Gameplay::screenWidth / 2 - (MeasureText("v1.0", fontSize) / 2), positionY + fontSize * 6 + 5, fontSize, GOLD);
+			DrawText("v0.4", Gameplay::screenWidth / 2 - (MeasureText("v1.0", fontSize) / 2), positionY + fontSize * 6 + 5, fontSize, GOLD);
 			DrawText("PRESS M FOR RETURN TO THE MENU", Gameplay::screenWidth / 2 - (MeasureText("PRESS M FOR RETURN TO THE MENU", 18) / 2), Gameplay::screenHeight - Gameplay::screenHeight / 20, 18, BLACK);
 		}
 	}

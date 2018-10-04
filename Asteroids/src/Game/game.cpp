@@ -6,7 +6,8 @@
 #include "screen\Win\win.h"
 #include "screen\Gameplay\gameplay.h"
 #include "screen\Credits\credits.h"
-
+#include "screen\Defeat\defeat.h"
+//#define MUSIC_ON
 namespace GameInit
 {
 	static void Init();
@@ -50,6 +51,9 @@ namespace GameInit
 		case CREDITS:
 			initCredits::UpdateCredits();
 			break;
+		case DEFEAT:
+			initDefeat::UpdateDefeat();
+			break;
 		default:
 			break;
 		}
@@ -67,10 +71,13 @@ namespace GameInit
 			initMenu::DrawMenu();
 			break;
 		case WIN:
-			initWin::DrawWin(Gameplay::left, Gameplay::right);
+			initWin::DrawWin();
 			break;
 		case CREDITS:
 			initCredits::DrawCredits();
+			break;
+		case DEFEAT:
+			initDefeat::DrawDefeat();
 			break;
 		}
 		EndDrawing();
