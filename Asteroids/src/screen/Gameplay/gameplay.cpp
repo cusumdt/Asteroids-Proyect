@@ -102,12 +102,12 @@ namespace GameInit
 		bool firstInit = true;
 		//--------------------------------------------
 		void initGame() {
-#ifdef MUSIC_ON
+
 			fxWav = LoadSound("res/Blip_Select.wav");
 			fxWav2= LoadSound("res/Blip_Select2.wav");
 			fxWav3= LoadSound("res/Blip_Select3.wav");
 			fxWav4 = LoadSound("res/Blip_Select4.wav");
-#endif
+
 			velocity = INIT_VELOCITY;
 			//--------------------------------
 			shipHeight = (PLAYER_BASE_SIZE / 2) / tanf(20 * DEG2RAD);
@@ -309,7 +309,8 @@ namespace GameInit
 							shoot[i].lifeSpawn = 0;
 							instanceThisMeteor(meteor, a);
 						
-#ifdef MUSIC_ON
+							if (music) 
+							{
 							randomMusic = GetRandomValue(1, 4);
 							switch (randomMusic) {
 							case 1:
@@ -325,7 +326,7 @@ namespace GameInit
 								PlaySound(fxWav4);
 								break;
 							}
-#endif
+							}
 						}
 					}
 				}
@@ -338,8 +339,8 @@ namespace GameInit
 				if (CheckCollisionCircles(Vector2 { player.collider.x, player.collider.y }, player.collider.z, meteor[i].position, meteor[i].radius) && meteor[i].active) 
 				{
 					instanceThisMeteor(meteor, i);
-#ifdef MUSIC_ON
-
+					if (music)
+					{
 					randomMusic = GetRandomValue(1, 4);
 					switch (randomMusic) {
 					case 1:
@@ -355,7 +356,7 @@ namespace GameInit
 						PlaySound(fxWav4);
 						break;
 					}
-#endif
+					}
 					defeat();
 				}
 			}

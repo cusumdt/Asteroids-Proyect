@@ -6,7 +6,7 @@
 #include "Game\game.h"
 namespace GameInit
 {
-	
+	bool music = true;
 	namespace initMenu
 	{
 		static bool settings = false;
@@ -31,16 +31,24 @@ namespace GameInit
 		
 		static void drawFrame()
 		{
-			DrawRectangle(Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press Escape To Quit", fontSize) + 10, fontSize * 4 + 20, LIGHTGRAY);
-			DrawRectangleLines(Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press Escape To Quit", fontSize) + 10, fontSize * 4 + 20, GOLD);
+			DrawRectangle(Gameplay::screenWidth / 2 - (MeasureText("Press S to Silence Music", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press S to Silence Music", fontSize) + 10, fontSize * 5 + 20, LIGHTGRAY);
+			DrawRectangleLines(Gameplay::screenWidth / 2 - (MeasureText("Press S to Silence Music", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press S to Silence Music", fontSize) + 10, fontSize * 5 + 20, GOLD);
 		}
 		static void drawTextMenu() 
 		{
 			DrawText("ASTEROIDS", Gameplay::screenWidth / 2 - (MeasureText("ASTEROIDS", fontSizeTitle) / 2), Gameplay::screenHeight / 5, fontSizeTitle, GOLD);
 			DrawText("Press Space To Play", Gameplay::screenWidth / 2 - (MeasureText("Press Space To Play", fontSize) / 2), Gameplay::screenHeight / 3 + 5, fontSize, WHITE);
+			DrawText("Press Escape To Quit", Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize + 5, fontSize, WHITE);
 			DrawText("Press H to Help", Gameplay::screenWidth / 2 - (MeasureText("Press H To Help", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize * 2 + 5, fontSize, WHITE);
 			DrawText("Press C to Credits", Gameplay::screenWidth / 2 - (MeasureText("Press C to Credits", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize * 3 + 5, fontSize, WHITE);
-			DrawText("Press Escape To Quit", Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize + 5, fontSize, WHITE);
+			if (music)
+			{
+				DrawText("Press S to Silence Music", Gameplay::screenWidth / 2 - (MeasureText("Press S to Silence Music", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize * 4 + 5, fontSize, WHITE);
+			}
+			else
+			{
+				DrawText("Press S to Play Music", Gameplay::screenWidth / 2 - (MeasureText("Press S to Play Music", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize * 4 + 5, fontSize, WHITE);
+			}
 			DrawText("v0.4", Gameplay::screenWidth / 2 - (MeasureText("v1.0", 25) / 2), Gameplay::screenHeight - Gameplay::screenHeight / 20, 25, BLACK);
 			if (settings)
 			{
@@ -69,12 +77,15 @@ namespace GameInit
 			}
 			if (settings) 
 			{
-				if (IsKeyPressed(KEY_UP)) 
-				{
 				
-				}
+			}
+			if (IsKeyPressed(KEY_S))
+			{
+				music=!music;
+
 			}
 			SetExitKey(KEY_ESCAPE);
+		
 		}
 		void DrawMenu()
 		{

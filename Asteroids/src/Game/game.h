@@ -11,7 +11,7 @@ namespace GameInit
 		DEFEAT
 	};
 	extern Screen screen;
-
+	extern bool music;
 	//---------------------------------------------
 	void LoadScreen();
 	//---------------------------------------------

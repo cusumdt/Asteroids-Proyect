@@ -10,7 +10,7 @@ namespace GameInit
 		{
 			if (IsKeyDown(KEY_SPACE))
 			{
-				screen = GAME;
+				screen = MENU;
 			}
 			SetExitKey(KEY_ESCAPE);
 		}

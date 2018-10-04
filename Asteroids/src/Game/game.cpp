@@ -18,18 +18,19 @@ namespace GameInit
 	Music MusicLoop;
 	void Init() {
 		InitWindow(Gameplay::screenWidth, Gameplay::screenHeight, "Asteroids");
-#ifdef MUSIC_ON
 		InitAudioDevice();
 		MusicLoop = LoadMusicStream("res/music.ogg");
 		PlayMusicStream(MusicLoop);
-#endif
+		
+
 	}
 
 	void Update() 
 	{
-#ifdef MUSIC_ON
-		UpdateMusicStream(MusicLoop);
-#endif
+		if (music) 
+		{
+			UpdateMusicStream(MusicLoop);
+		}
 		switch (screen)
 		{
 		case GAME:
@@ -86,10 +87,11 @@ namespace GameInit
 
 
 	void Close() {
-#ifdef MUSIC_ON
-		UnloadMusicStream(MusicLoop);   // Unload music stream buffers from RAM
-		CloseAudioDevice();
-#endif
+
+		
+			UnloadMusicStream(MusicLoop);   // Unload music stream buffers from RAM
+			CloseAudioDevice();
+
 		CloseWindow();
 	}
 	void LoadScreen()
