@@ -8,7 +8,7 @@ namespace GameInit
 	{
 		void UpdateWin()
 		{
-			if (IsKeyDown(KEY_SPACE))
+			if (IsKeyPressed(KEY_SPACE))
 			{
 				screen = MENU;
 			}

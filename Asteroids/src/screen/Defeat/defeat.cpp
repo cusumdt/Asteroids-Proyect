@@ -8,7 +8,7 @@ namespace GameInit
 	{
 		void UpdateDefeat()
 		{
-			if (IsKeyDown(KEY_SPACE))
+			if (IsKeyPressed(KEY_SPACE))
 			{
 				screen = MENU;
 			}
@@ -28,7 +28,7 @@ namespace GameInit
 			DrawText("You Lose!", Gameplay::screenWidth / 2 - (MeasureText("You Lose!", fontSizeTitle) / 2), Gameplay::screenHeight / 5, fontSizeTitle, GOLD);
 			DrawRectangle(Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press Escape To Quit", fontSize) + 10, fontSize * 2 + 10, LIGHTGRAY);
 			DrawRectangleLines(Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press Escape To Quit", fontSize) + 10, fontSize * 2 + 10, GOLD);
-			DrawText("Press Space To Play", Gameplay::screenWidth / 2 - (MeasureText("Press Space To Play", fontSize) / 2), Gameplay::screenHeight / 3 + 5, fontSize, WHITE);
+			DrawText("Press Space To Menu", Gameplay::screenWidth / 2 - (MeasureText("Press Space To Menu", fontSize) / 2), Gameplay::screenHeight / 3 + 5, fontSize, WHITE);
 			DrawText("Press Scape To Quit", Gameplay::screenWidth / 2 - (MeasureText("Press Scape To Quit", fontSize) / 2), Gameplay::screenHeight / 3 + fontSize + 5, fontSize, WHITE);
 		}
 	}

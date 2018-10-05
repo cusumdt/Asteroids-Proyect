@@ -10,7 +10,6 @@ namespace GameInit
 	namespace initMenu
 	{
 		static bool settings = false;
-
 		static int fontSizeTitle = 0;
 		static int fontSize = 0;
 		void initSize()
@@ -63,7 +62,7 @@ namespace GameInit
 		{
 
 
-			if (IsKeyDown(KEY_SPACE))
+			if (IsKeyPressed(KEY_SPACE))
 			{
 				screen = GAME;
 			}
