@@ -22,6 +22,9 @@
     <Filter Include="Screen\Defeat">
       <UniqueIdentifier>{3c57102f-e64f-4b03-828f-6ccf2329b3d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Logic">
+      <UniqueIdentifier>{adedc66b-553f-4993-8c2e-e55eaf4fbab6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\screen\Menu\menu.cpp">
@@ -43,6 +46,9 @@
     <ClCompile Include="..\src\screen\Defeat\defeat.cpp">
       <Filter>Screen\Defeat</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Logic\mov_ship.cpp">
+      <Filter>Logic</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\screen\Menu\menu.h">
@@ -62,6 +68,9 @@
     </ClInclude>
     <ClInclude Include="..\src\screen\Defeat\defeat.h">
       <Filter>Screen\Defeat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Logic\mov_ship.h">
+      <Filter>Logic</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

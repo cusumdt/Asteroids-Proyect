@@ -1,5 +1,8 @@
 #ifndef GAMEPLAY_H
 #define GAMEPLAY_H
+
+#include "raylib.h"
+
 namespace GameInit
 {
 	namespace Gameplay
@@ -12,6 +15,16 @@ namespace GameInit
 		void initGame();
 		void updateGame();
 		void DrawGame();
+		struct Player {
+			Vector2 position;
+			Vector2 speed;
+			float acceleration;
+			float rotation;
+			Vector3 collider;
+			Color color;
+		};
+		extern Player player;
+		extern float shipHeight;
 	}
 }
 #endif

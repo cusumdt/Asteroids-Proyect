@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Game\game.cpp" />
+    <ClCompile Include="..\src\Logic\mov_ship.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\screen\Credits\credits.cpp" />
     <ClCompile Include="..\src\screen\Defeat\defeat.cpp" />
@@ -29,6 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game\game.h" />
+    <ClInclude Include="..\src\Logic\mov_ship.h" />
     <ClInclude Include="..\src\screen\Credits\credits.h" />
     <ClInclude Include="..\src\screen\Defeat\defeat.h" />
     <ClInclude Include="..\src\screen\Gameplay\gameplay.h" />

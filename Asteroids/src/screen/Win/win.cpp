@@ -22,9 +22,7 @@ namespace GameInit
 			{
 				fontSize = 40;
 				fontSizeTitle = 100;
-
 			}
-			
 			DrawText("You Win,Congrats!", Gameplay::screenWidth / 2 - (MeasureText("You Win,Congrats!", fontSizeTitle) / 2), Gameplay::screenHeight / 5, fontSizeTitle, GOLD);
 			DrawRectangle(Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press Escape To Quit", fontSize) + 10, fontSize * 2 + 10, LIGHTGRAY);
 			DrawRectangleLines(Gameplay::screenWidth / 2 - (MeasureText("Press Escape To Quit", fontSize) / 2) - 5, Gameplay::screenHeight / 3, MeasureText("Press Escape To Quit", fontSize) + 10, fontSize * 2 + 10, GOLD);

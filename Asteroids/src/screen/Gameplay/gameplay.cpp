@@ -3,6 +3,7 @@
 #include "raylib.h"
 
 #include "gameplay.h"
+#include "Logic\mov_ship.h"
 #include <ctime>
 #include <iostream>
 //#define MUSIC_ON
@@ -48,14 +49,7 @@ namespace GameInit
 			Color color;
 		};
 
-		struct Player {
-			Vector2 position;
-			Vector2 speed;
-			float acceleration;
-			float rotation;
-			Vector3 collider;
-			Color color;
-		};
+	
 		static void initMeteor(Meteor meteor[]);
 		static void drawMeteor(Meteor meteor[]);
 		static void checkColisionMeteor(Meteor meteor[]);
@@ -89,8 +83,8 @@ namespace GameInit
 		static Sound fxWav3;
 		static Sound fxWav4;
 		static int velocity = INIT_VELOCITY;
-		static Player player;
-		static float shipHeight;
+		Player player;
+		float shipHeight;
 		static const float PLAYER_BASE_SIZE = 20.0f;
 		static const float PLAYER_SPEED = 300.0f;
 		static Shoot shoot[PLAYER_MAX_SHOOTS];
@@ -128,32 +122,7 @@ namespace GameInit
 		{
 			victory();
 			SetExitKey(0);
-			if (IsKeyDown(KEY_LEFT)) player.rotation -= 300 * GetFrameTime();
-			if (IsKeyDown(KEY_RIGHT)) player.rotation += 300 * GetFrameTime();
-			player.speed.x = sin(player.rotation*DEG2RAD);
-			player.speed.y = cos(player.rotation*DEG2RAD);
-			if (IsKeyDown(KEY_UP))
-			{
-				if (player.acceleration < 1) player.acceleration += 300;
-			}
-			else
-			{
-				if (player.acceleration > 0) player.acceleration -= 150;
-				else if (player.acceleration < 0) player.acceleration = 0;
-			}
-			if (IsKeyDown(KEY_DOWN))
-			{
-				if (player.acceleration > 0) player.acceleration -= 300 ;
-				else if (player.acceleration < 0) player.acceleration = 0;
-			}
-			
-			player.position.x += (player.speed.x*player.acceleration)* GetFrameTime();
-			player.position.y -= (player.speed.y*player.acceleration)* GetFrameTime();
-			if (player.position.x > screenWidth + shipHeight) player.position.x = -(shipHeight);
-			else if (player.position.x < -(shipHeight)) player.position.x = screenWidth + shipHeight;
-			if (player.position.y >(screenHeight + shipHeight)) player.position.y = -(shipHeight);
-			else if (player.position.y < -(shipHeight)) player.position.y = screenHeight + shipHeight;
-
+			Logic_ship::mov_ship();
 			if (IsKeyDown(KEY_M))
 			{
 				screen = MENU;
