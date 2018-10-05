@@ -89,6 +89,7 @@ namespace GameInit
 		static const float PLAYER_SPEED = 300.0f;
 		static Shoot shoot[PLAYER_MAX_SHOOTS];
 		static short int points = 0;
+		
 		//--------------------------------------------
 	
 		bool left = false;
@@ -104,7 +105,9 @@ namespace GameInit
 
 			velocity = INIT_VELOCITY;
 			//--------------------------------
+		
 			shipHeight = (PLAYER_BASE_SIZE / 2) / tanf(20 * DEG2RAD);
+			player.player_texture = LoadTexture("res/Space_Ship.png");
 			player.position = Vector2 { (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
 			player.speed = Vector2 { 0, 0 };
 			player.acceleration = 0;
@@ -155,7 +158,7 @@ namespace GameInit
 				meteor[i].position = Vector2{ meteor[i].x, meteor[i].y };
 			}
 			//-------------------------------------------------------
-			if (IsKeyPressed(KEY_SPACE))
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 			{
 				for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 				{
@@ -227,6 +230,7 @@ namespace GameInit
 			Vector2 v1 = { player.position.x + sinf(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cosf(player.rotation*DEG2RAD)*(shipHeight) };
 			Vector2 v2 = { player.position.x - cosf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE / 2), player.position.y - sinf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE / 2) };
 			Vector2 v3 = { player.position.x + cosf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE / 2), player.position.y + sinf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE / 2) };
+
 			DrawTriangle(v1, v2, v3, MAROON);
 			drawMeteor(meteor);
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
@@ -326,7 +330,7 @@ namespace GameInit
 						break;
 					}
 					}
-					defeat();
+					//defeat();
 				}
 			}
 		}

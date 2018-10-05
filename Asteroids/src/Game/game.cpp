@@ -91,7 +91,7 @@ namespace GameInit
 		
 			UnloadMusicStream(MusicLoop);   // Unload music stream buffers from RAM
 			CloseAudioDevice();
-
+			UnloadTexture(texture);       // Texture unloading
 		CloseWindow();
 	}
 	void LoadScreen()

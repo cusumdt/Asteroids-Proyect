@@ -16,12 +16,16 @@ namespace GameInit
 		void updateGame();
 		void DrawGame();
 		struct Player {
+			Texture2D player_texture;
 			Vector2 position;
 			Vector2 speed;
 			float acceleration;
 			float rotation;
 			Vector3 collider;
 			Color color;
+			Rectangle sourceRec;
+			Rectangle destRec;
+
 		};
 		extern Player player;
 		extern float shipHeight;

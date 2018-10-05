@@ -5,6 +5,7 @@
 #include "screen/Gameplay/gameplay.h"
 #include <ctime>
 #include <iostream>
+#include <cmath>
 namespace GameInit 
 {
 	namespace Logic_ship 
@@ -14,9 +15,12 @@ namespace GameInit
 			using namespace Gameplay;
 			if (IsKeyDown(KEY_LEFT)) player.rotation -= 300 * GetFrameTime();
 			if (IsKeyDown(KEY_RIGHT)) player.rotation += 300 * GetFrameTime();
+			//player.speed.x = sin(player.rotation*DEG2RAD);
+			
 			player.speed.x = sin(player.rotation*DEG2RAD);
 			player.speed.y = cos(player.rotation*DEG2RAD);
-			if (IsKeyDown(KEY_UP))
+			//player.speed.y = cos(player.rotation*DEG2RAD);
+			if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
 			{
 				if (player.acceleration < 1) player.acceleration += 300;
 			}
