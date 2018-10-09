@@ -16,13 +16,12 @@ namespace GameInit
 	static void Close();
 	Texture2D texture;
 	Music MusicLoop;
-	void Init() {
+	void Init() 
+	{
 		InitWindow(Gameplay::screenWidth, Gameplay::screenHeight, "Asteroids");
 		InitAudioDevice();
 		MusicLoop = LoadMusicStream("res/music.ogg");
 		PlayMusicStream(MusicLoop);
-		
-
 	}
 
 	void Update() 
