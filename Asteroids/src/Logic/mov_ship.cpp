@@ -12,11 +12,15 @@ namespace GameInit
 	{
 		void mov_ship()
 		{
+			float delta_y;
+			float delta_x;
 			using namespace Gameplay;
-			if (IsKeyDown(KEY_LEFT)) player.rotation -= 300 * GetFrameTime();
-			if (IsKeyDown(KEY_RIGHT)) player.rotation += 300 * GetFrameTime();
+		
 			//player.speed.x = sin(player.rotation*DEG2RAD);
-			
+
+			delta_y = player.destRec.y - GetMouseY();
+			delta_x = player.destRec.x - GetMouseX();
+			player.rotation = (atan2(delta_y, delta_x)*RAD2DEG)-90;
 			player.speed.x = sin(player.rotation*DEG2RAD);
 			player.speed.y = cos(player.rotation*DEG2RAD);
 			//player.speed.y = cos(player.rotation*DEG2RAD);

@@ -99,19 +99,23 @@ namespace GameInit
 		void initGame() {
 
 			fxWav = LoadSound("res/Blip_Select.wav");
-			fxWav2= LoadSound("res/Blip_Select2.wav");
-			fxWav3= LoadSound("res/Blip_Select3.wav");
+			fxWav2 = LoadSound("res/Blip_Select2.wav");
+			fxWav3 = LoadSound("res/Blip_Select3.wav");
 			fxWav4 = LoadSound("res/Blip_Select4.wav");
 
 			velocity = INIT_VELOCITY;
 			//--------------------------------
-		
+
 			shipHeight = (PLAYER_BASE_SIZE / 2) / tanf(20 * DEG2RAD);
 			player.player_texture = LoadTexture("res/Space_Ship.png");
-			player.position = Vector2 { (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
-			player.speed = Vector2 { 0, 0 };
+			player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
+			player.speed = Vector2{ 0, 0 };
 			player.acceleration = 0;
 			player.rotation = 0;
+			player.sourceRec = { 0.0f,0.0f,(float)player.player_texture.width,(float)player.player_texture.height };
+			player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
+			player.origin = { (float)player.player_texture.width / 2,(float)player.player_texture.height / 2 };
+			
 			player.collider = Vector3 { player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight / 2.5f), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight / 2.5f), 12 };
 			player.color = LIGHTGRAY;
 			//--------------------------------
@@ -222,16 +226,11 @@ namespace GameInit
 					}
 				}
 			}
-
-		
+			player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
 		}
 		void DrawGame()
 		{
-			Vector2 v1 = { player.position.x + sinf(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cosf(player.rotation*DEG2RAD)*(shipHeight) };
-			Vector2 v2 = { player.position.x - cosf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE / 2), player.position.y - sinf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE / 2) };
-			Vector2 v3 = { player.position.x + cosf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE / 2), player.position.y + sinf(player.rotation*DEG2RAD)*(PLAYER_BASE_SIZE / 2) };
-
-			DrawTriangle(v1, v2, v3, MAROON);
+			DrawTexturePro(player.player_texture, player.sourceRec, player.destRec,player.origin,player.rotation,WHITE);
 			drawMeteor(meteor);
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 			{
@@ -239,7 +238,6 @@ namespace GameInit
 			}
 
 			DrawText(FormatText("%01i", points), (screenWidth / 2) - 20, screenHeight / 20, 30, LIGHTGRAY);
-
 			DrawText("PRESS M FOR RETURN TO THE MENU",	screenWidth / 2 - (MeasureText("PRESS M FOR RETURN TO THE MENU",15) / 2), screenHeight - screenHeight / 20 , 15, BLACK);
 		}
 		void initMeteor(Meteor meteor[])
