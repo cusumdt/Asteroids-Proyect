@@ -328,7 +328,7 @@ namespace GameInit
 						break;
 					}
 					}
-					//defeat();
+					defeat();
 				}
 			}
 		}
