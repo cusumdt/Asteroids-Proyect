@@ -150,27 +150,6 @@ namespace GameInit
 		{
 
 			initSize();
-			if (IsKeyPressed(KEY_SPACE))
-			{
-				screen = GAME;
-			}
-			if (IsKeyPressed(KEY_H))
-			{
-				settings = !settings;
-			}
-			if (IsKeyPressed(KEY_C))
-			{
-				screen = CREDITS;
-			}
-			if (settings)
-			{
-
-			}
-			if (IsKeyPressed(KEY_S))
-			{
-				music = !music;
-
-			}
 			if (!settings) 
 			{
 				if (CheckCollisionPointRec(GetMousePosition(), recplay))
@@ -212,7 +191,11 @@ namespace GameInit
 				if (CheckCollisionPointRec(GetMousePosition(), recExit))
 				{
 					exitButtonAnimationOn = false;
-					SetExitKey(KEY_ESCAPE);
+
+					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+					{
+						GameInit::endGame = !GameInit::endGame;
+					}
 				}
 				else
 				{

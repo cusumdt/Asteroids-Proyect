@@ -14,6 +14,7 @@ namespace GameInit
 	static void Update();
 	static void Draw();
 	static void Close();
+	bool endGame = false;
 	Texture2D texture;
 	Music MusicLoop;
 	void Init() 
@@ -90,13 +91,14 @@ namespace GameInit
 			CloseAudioDevice();
 			UnloadTexture(texture);       // Texture unloading
 			initMenu::UnloadTextureMenu();
+			initWin::closeWin();
 			CloseWindow();
 	}
 	void LoadScreen()
 	{
 		Init();
 		// Main game loop
-		while (!WindowShouldClose())    // Detect window close button or ESC key
+		while (!WindowShouldClose() && !endGame)    // Detect window close button or ESC key
 		{
 			Update();
 			Draw();
