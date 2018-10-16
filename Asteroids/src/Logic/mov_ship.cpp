@@ -32,8 +32,11 @@ namespace GameInit
 			}
 			else
 			{
-				if (player.acceleration > 0) player.acceleration -= 150;
-				else if (player.acceleration < 0) player.acceleration = 0;
+				if (player.acceleration > 200) player.acceleration -= 0.5f;
+				else
+				{
+					player.acceleration = 200;
+				}
 			}
 			player.position.x += (player.speed.x*player.acceleration)* GetFrameTime();
 			player.position.y -= (player.speed.y*player.acceleration)* GetFrameTime();
