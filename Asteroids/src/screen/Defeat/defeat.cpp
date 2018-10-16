@@ -1,7 +1,10 @@
 #include "screen\Defeat\defeat.h"
+
+#include "raylib.h"
+
 #include "Game\game.h"
 #include "screen\Gameplay\gameplay.h"
-#include "raylib.h"
+
 namespace GameInit
 {
 	namespace initDefeat
@@ -21,8 +24,8 @@ namespace GameInit
 			if (firstInit)
 			{
 				firstInit = false;
-				menu = LoadTexture("res/play.png");
-				negativeMenu = LoadTexture("res/play2.png");
+				menu = LoadTexture("res/boton_menu.png");
+				negativeMenu = LoadTexture("res/boton_menu2.png");
 				exit = LoadTexture("res/exit.png");
 				negativeExit = LoadTexture("res/exit2.png");
 				fond = LoadTexture("res/menu.png");
@@ -87,6 +90,14 @@ namespace GameInit
 			{
 				DrawTexture(negativeExit, Gameplay::screenWidth / 2 - exit.width / 2, Gameplay::screenHeight / 2 + exit.height + 5, WHITE);
 			}
+		}
+		void CloseDefeat()
+		{
+			UnloadTexture(fond);
+			UnloadTexture(menu);
+			UnloadTexture(negativeMenu);
+			UnloadTexture(exit);
+			UnloadTexture(negativeExit);
 		}
 	}
 }

@@ -92,6 +92,7 @@ namespace GameInit
 			UnloadTexture(texture);       // Texture unloading
 			initMenu::UnloadTextureMenu();
 			initWin::closeWin();
+			initDefeat::CloseDefeat();
 			CloseWindow();
 	}
 	void LoadScreen()

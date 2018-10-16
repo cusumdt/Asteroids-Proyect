@@ -1,11 +1,13 @@
 #include "mov_ship.h"
 
-#include "raylib.h"
-
-#include "screen/Gameplay/gameplay.h"
 #include <ctime>
 #include <iostream>
 #include <cmath>
+
+#include "raylib.h"
+
+#include "screen/Gameplay/gameplay.h"
+
 namespace GameInit 
 {
 	namespace Logic_ship 

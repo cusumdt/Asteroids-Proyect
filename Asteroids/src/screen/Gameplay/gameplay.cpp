@@ -1,11 +1,13 @@
-#include "Game\game.h"
-
-#include "raylib.h"
-
 #include "gameplay.h"
-#include "Logic\mov_ship.h"
+
+
 #include <ctime>
 #include <iostream>
+
+#include "raylib.h"
+#include "Game\game.h"
+#include "Logic\mov_ship.h"
+
 //#define MUSIC_ON
 namespace GameInit
 {

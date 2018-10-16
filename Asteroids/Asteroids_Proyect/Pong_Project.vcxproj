@@ -106,6 +106,7 @@
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\raylib-2.0.0-Win32-msvc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
       <Command>MKDIR "$(TargetDir)res"

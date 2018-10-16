@@ -1,7 +1,10 @@
 #include "screen\Win\win.h"
+
+#include "raylib.h"
+
 #include "Game\game.h"
 #include "screen\Gameplay\gameplay.h"
-#include "raylib.h"
+
 namespace GameInit
 {
 	namespace initWin
@@ -22,8 +25,8 @@ namespace GameInit
 			if (firstInit)
 			{
 				firstInit = false;
-				menu = LoadTexture("res/play.png");
-				negativeMenu = LoadTexture("res/play2.png");
+				menu = LoadTexture("res/boton_menu.png");
+				negativeMenu = LoadTexture("res/boton_menu2.png");
 				exit = LoadTexture("res/exit.png");
 				negativeExit = LoadTexture("res/exit2.png");
 				fond = LoadTexture("res/menu.png");
@@ -91,6 +94,10 @@ namespace GameInit
 		void closeWin() 
 		{
 			UnloadTexture(fond);
+			UnloadTexture(menu);
+			UnloadTexture(negativeMenu);
+			UnloadTexture(exit);
+			UnloadTexture(negativeExit);
 		}
 	}
 }

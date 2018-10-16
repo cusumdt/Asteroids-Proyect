@@ -6,6 +6,7 @@ namespace GameInit
 	{
 		void UpdateDefeat();
 		void DrawDefeat();
+		void CloseDefeat();
 	}
 }
 #endif // !DEFEAT_H

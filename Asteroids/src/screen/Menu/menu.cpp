@@ -1,9 +1,10 @@
-
 #include "screen\Menu\menu.h"
+
 #include "raylib.h"
 
 #include "screen\Gameplay\gameplay.h"
 #include "Game\game.h"
+
 namespace GameInit
 {
 	bool music = true;
@@ -17,9 +18,12 @@ namespace GameInit
 		static bool exitButtonAnimationOn;
 		static bool muteOnButtonAnimationOn;
 		static bool quitButtonAnimationOn;
+		static bool creditsButtonAnimationOn;
 		Texture2D fond;
 		Texture2D play;
 		Texture2D negativePlay;
+		Texture2D credits;
+		Texture2D negativeCredits;
 		Texture2D help;
 		Texture2D negativeHelp;
 		Texture2D exit;
@@ -31,10 +35,12 @@ namespace GameInit
 		Texture2D quit;
 		Texture2D negativeQuit;
 		Rectangle recplay;
+		Rectangle recCredits;
 		Rectangle recHelp;
 		Rectangle recMuteOn;
 		Rectangle recExit;
 		Rectangle recQuit;
+		
 		static bool firstInit=true;
 		void initSize()
 		{
@@ -59,6 +65,8 @@ namespace GameInit
 			fond = LoadTexture("res/menu.png");
 			play = LoadTexture("res/play.png");
 			negativePlay = LoadTexture("res/play2.png");
+			credits= LoadTexture("res/credits.png");
+			negativeCredits= LoadTexture("res/credits2.png");
 			help = LoadTexture("res/help.png");
 			negativeHelp = LoadTexture("res/help2.png");
 			exit = LoadTexture("res/exit.png");
@@ -70,7 +78,8 @@ namespace GameInit
 			quit= LoadTexture("res/quit.png");
 			negativeQuit = LoadTexture("res/quit2.png");
 			//recplay = {(float)play.width,(float)play.height,(float)Gameplay::screenWidth / 2 - play.width / 2 ,(float)Gameplay::screenHeight / 2 - play.height / 2 };
-			recplay = { (float)Gameplay::screenWidth / 2 - play.width / 2,(float)Gameplay::screenHeight / 2 ,(float)play.width,(float)play.height };
+			recplay = { (float)Gameplay::screenWidth / 2 - play.width / 2,(float)Gameplay::screenHeight / 2 - play.height,(float)play.width,(float)play.height };
+			recCredits= { (float)Gameplay::screenWidth / 2 - play.width / 2,(float)Gameplay::screenHeight / 2,(float)play.width,(float)play.height };
 			recHelp = { (float)Gameplay::screenWidth / 2 - help.width / 2,(float)Gameplay::screenHeight / 2  + help.height + 5,(float)help.width,(float)help.height };
 			recMuteOn = { (float)Gameplay::screenWidth / 2 - mute.width / 2,(float)Gameplay::screenHeight / 2  + mute.height * 2 + 5,(float)mute.width,(float)mute.height };
 			recExit = { (float)Gameplay::screenWidth / 2 - exit.width / 2,(float)Gameplay::screenHeight / 2 + exit.height * 3 + 5,(float)exit.width,(float)exit.height };
@@ -83,12 +92,21 @@ namespace GameInit
 			DrawTexture(fond, 0, 0, WHITE);
 			if (playButtonAnimationOn)
 			{
-				DrawTexture(play, Gameplay::screenWidth / 2 - play.width / 2, Gameplay::screenHeight / 2, WHITE);
+				DrawTexture(play, Gameplay::screenWidth / 2 - play.width / 2, Gameplay::screenHeight / 2 -play.height, WHITE);
 			}
 			else
 			{
-				DrawTexture(negativePlay, Gameplay::screenWidth / 2 - negativePlay.width / 2, Gameplay::screenHeight / 2, WHITE);
+				DrawTexture(negativePlay, Gameplay::screenWidth / 2 - negativePlay.width / 2, Gameplay::screenHeight / 2 - play.height, WHITE);
 			}
+			if (creditsButtonAnimationOn)
+			{
+				DrawTexture(credits, Gameplay::screenWidth / 2 - credits.width / 2, Gameplay::screenHeight / 2, WHITE);
+			}
+			else
+			{
+				DrawTexture(negativeCredits, Gameplay::screenWidth / 2 - negativeCredits.width / 2, Gameplay::screenHeight / 2, WHITE);
+			}
+
 			if (helpButtonAnimationOn)
 			{
 				DrawTexture(help, Gameplay::screenWidth / 2 - help.width / 2, Gameplay::screenHeight / 2 + help.height + 5, WHITE);
@@ -163,6 +181,18 @@ namespace GameInit
 				else
 				{
 					playButtonAnimationOn = true;
+				}
+				if (CheckCollisionPointRec(GetMousePosition(), recCredits))
+				{
+					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+					{
+						screen = CREDITS;
+					}
+					creditsButtonAnimationOn = false;
+				}
+				else
+				{
+					creditsButtonAnimationOn = true;
 				}
 				if (CheckCollisionPointRec(GetMousePosition(), recHelp))
 				{
