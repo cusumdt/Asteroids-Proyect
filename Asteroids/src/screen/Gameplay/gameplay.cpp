@@ -56,7 +56,20 @@ namespace GameInit
 			Color color;
 		};
 
-
+		Rectangle recExit;
+		Texture2D exit;
+		Texture2D negativeExit;
+		Texture2D menu;
+		Texture2D negativeMenu;
+		Texture2D asteroids;
+		Texture2D fond_black;
+		Rectangle recMenu;
+		Texture2D boton_pause;
+		Texture2D negativePause;
+		Rectangle recPause;
+		static bool pauseButtonAnimationOn;
+		static bool menuButtonAnimationOn;
+		static bool exitButtonAnimationOn;
 		static void initMeteor(Meteor meteor[]);
 		static void drawMeteor(Meteor meteor[]);
 		static void checkColisionMeteor(Meteor meteor[]);
@@ -96,7 +109,7 @@ namespace GameInit
 		static const float PLAYER_SPEED = 300.0f;
 		static Shoot shoot[PLAYER_MAX_SHOOTS];
 		static short int points = 0;
-
+		static bool pause;
 		//--------------------------------------------
 
 		bool left = false;
@@ -122,126 +135,188 @@ namespace GameInit
 			player.sourceRec = { 0.0f,0.0f,(float)player.player_texture.width,(float)player.player_texture.height };
 			player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
 			player.origin = { (float)player.player_texture.width / 2,(float)player.player_texture.height / 2 };
-
 			player.collider = Vector3{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight / 2.5f), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight / 2.5f), 12 };
 			player.color = LIGHTGRAY;
 			//--------------------------------
 			initMeteor(meteor);
 			initShoot(shoot);
-
+	
+			menu = LoadTexture("res/boton_menu.png");
+			negativeMenu = LoadTexture("res/boton_menu2.png");
+			exit = LoadTexture("res/exit.png");
+			negativeExit = LoadTexture("res/exit2.png");
+			fond_black = LoadTexture("res/fondo_oscuridad.png");
+			asteroids = LoadTexture("res/asteroids.png");
+			boton_pause= LoadTexture("res/pause.png");
+			negativePause= LoadTexture("res/pause2.png");
+			recMenu = { (float)Gameplay::screenWidth / 2 - menu.width / 2,(float)Gameplay::screenHeight / 2 ,(float)menu.width,(float)menu.height };
+			recExit = { (float)Gameplay::screenWidth / 2 - exit.width / 2,(float)Gameplay::screenHeight / 2 + exit.height + 5,(float)exit.width,(float)exit.height };
+			recPause = { (float)Gameplay::screenWidth - 100, (float)5,(float)boton_pause.width,(float)boton_pause.height };
 		}
 
 
 		void updateGame()
 		{
-			victory();
-			SetExitKey(0);
-			Logic_ship::mov_ship();
-			if (IsKeyDown(KEY_M))
+			if (!pause)
 			{
-				screen = MENU;
-				initMeteor(meteor);
-				points = INIT_SCORE;
-				player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
-				player.rotation = 0;
-			}
-			//---------------------------------------------------------
-			//Meteor Movement
-			movMeteor(meteor);
-			//---------------------------------------------------------
-			//Bordes pantalla
-			for (int i = 0; i < TOTAL_METEOR; i++)
-			{
-				if (meteor[i].y <= (LIMIT_TOP - RADIUS_BALL * 4) ||
-					meteor[i].y >= (screenHeight + RADIUS_BALL * 4) ||
-					meteor[i].x >= (screenWidth + RADIUS_BALL * 4) ||
-					meteor[i].x <= (0 - RADIUS_BALL * 4))
+				if (CheckCollisionPointRec(GetMousePosition(), recPause))
 				{
-					instanceThisMeteor(meteor, i);
+					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+					{
+						pause = !pause;
+					}
+					pauseButtonAnimationOn = false;
+				}
+				else
+				{
+					pauseButtonAnimationOn = true;
+				}
+				victory();
+				SetExitKey(0);
+				Logic_ship::mov_ship();
+				if (IsKeyDown(KEY_M))
+				{
+					pause = !pause;
+				}
+				//---------------------------------------------------------
+				//Meteor Movement
+				movMeteor(meteor);
+				//---------------------------------------------------------
+				//Bordes pantalla
+				for (int i = 0; i < TOTAL_METEOR; i++)
+				{
+					if (meteor[i].y <= (LIMIT_TOP - RADIUS_BALL * 4) ||
+						meteor[i].y >= (screenHeight + RADIUS_BALL * 4) ||
+						meteor[i].x >= (screenWidth + RADIUS_BALL * 4) ||
+						meteor[i].x <= (0 - RADIUS_BALL * 4))
+					{
+						instanceThisMeteor(meteor, i);
+					}
+
+				}
+				//--------------------------------------------------------
+				//Colision barras/pelota
+				checkColisionMeteor(meteor);
+				for (int i = 0; i < TOTAL_METEOR; i++)
+				{
+					meteor[i].position = Vector2{ meteor[i].x, meteor[i].y };
+				}
+				//-------------------------------------------------------
+				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+				{
+					for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
+					{
+						if (!shoot[i].active)
+						{
+							shoot[i].position = Vector2{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight) };
+							shoot[i].active = true;
+							shoot[i].speed.x = 1.5*sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
+							shoot[i].speed.y = 1.5*cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
+							shoot[i].rotation = player.rotation;
+						}
+					}
 				}
 
-			}
-			//--------------------------------------------------------
-			//Colision barras/pelota
-			checkColisionMeteor(meteor);
-			for (int i = 0; i < TOTAL_METEOR; i++)
-			{
-				meteor[i].position = Vector2{ meteor[i].x, meteor[i].y };
-			}
-			//-------------------------------------------------------
-			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-			{
+				// Shoot life timer
 				for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 				{
-					if (!shoot[i].active)
+					if (shoot[i].active)
 					{
-						shoot[i].position = Vector2{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight) };
-						shoot[i].active = true;
-						shoot[i].speed.x = 1.5*sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
-						shoot[i].speed.y = 1.5*cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
-						shoot[i].rotation = player.rotation;
+						shoot[i].lifeSpawn += 1 * GetFrameTime();
 					}
 				}
-			}
 
-			// Shoot life timer
-			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
-			{
-				if (shoot[i].active)
+				// Shoot logic
+				for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 				{
-					shoot[i].lifeSpawn += 1 * GetFrameTime();
-				}
-			}
+					if (shoot[i].active)
+					{
+						// Movement
+						shoot[i].position.x += shoot[i].speed.x* GetFrameTime();
+						shoot[i].position.y -= shoot[i].speed.y* GetFrameTime();
 
-			// Shoot logic
-			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
-			{
-				if (shoot[i].active)
+						// Collision logic: shoot vs walls
+						if (shoot[i].position.x > screenWidth + shoot[i].radius)
+						{
+							shoot[i].active = false;
+							shoot[i].lifeSpawn = 0;
+						}
+						else if (shoot[i].position.x < 0 - shoot[i].radius)
+						{
+							shoot[i].active = false;
+							shoot[i].lifeSpawn = 0;
+						}
+						if (shoot[i].position.y > screenHeight + shoot[i].radius)
+						{
+							shoot[i].active = false;
+							shoot[i].lifeSpawn = 0;
+						}
+						else if (shoot[i].position.y < 0 - shoot[i].radius)
+						{
+							shoot[i].active = false;
+							shoot[i].lifeSpawn = 0;
+						}
+						// Life of shoot
+						if (shoot[i].lifeSpawn >= 60)
+						{
+							shoot[i].position = Vector2{ 0, 0 };
+							shoot[i].speed = Vector2{ 0, 0 };
+							shoot[i].lifeSpawn = 0;
+							shoot[i].active = false;
+						}
+					}
+				}
+				for (int i = 0; i < TOTAL_METEOR; i++)
 				{
-					// Movement
-					shoot[i].position.x += shoot[i].speed.x* GetFrameTime();
-					shoot[i].position.y -= shoot[i].speed.y* GetFrameTime();
+					meteor[i].destRec = { meteor[i].x,meteor[i].y,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
+				}
+				player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
+			}
+			else 
+			{
+				if (CheckCollisionPointRec(GetMousePosition(), recMenu))
+				{
+					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+					{
+						initMeteor(meteor);
+						points = INIT_SCORE;
+						player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
+						player.rotation = 0;
+						pause = !pause;
+						screen = MENU;
+					}
+					menuButtonAnimationOn = false;
+				}
+				else
+				{
+					menuButtonAnimationOn = true;
+				}
+				if (CheckCollisionPointRec(GetMousePosition(), recExit))
+				{
+					exitButtonAnimationOn = false;
 
-					// Collision logic: shoot vs walls
-					if (shoot[i].position.x > screenWidth + shoot[i].radius)
+					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 					{
-						shoot[i].active = false;
-						shoot[i].lifeSpawn = 0;
-					}
-					else if (shoot[i].position.x < 0 - shoot[i].radius)
-					{
-						shoot[i].active = false;
-						shoot[i].lifeSpawn = 0;
-					}
-					if (shoot[i].position.y > screenHeight + shoot[i].radius)
-					{
-						shoot[i].active = false;
-						shoot[i].lifeSpawn = 0;
-					}
-					else if (shoot[i].position.y < 0 - shoot[i].radius)
-					{
-						shoot[i].active = false;
-						shoot[i].lifeSpawn = 0;
-					}
-					// Life of shoot
-					if (shoot[i].lifeSpawn >= 60)
-					{
-						shoot[i].position = Vector2{ 0, 0 };
-						shoot[i].speed = Vector2{ 0, 0 };
-						shoot[i].lifeSpawn = 0;
-						shoot[i].active = false;
+						pause = !pause;
 					}
 				}
-			}
-			for (int i = 0; i < TOTAL_METEOR; i++)
-			{
-				meteor[i].destRec = { meteor[i].x,meteor[i].y,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
-			}
-			player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
+				else
+				{
+					exitButtonAnimationOn = true;
+				}
+			}		
 		}
 		void DrawGame()
 		{
 			DrawTexture(fond, 0, 0, WHITE);
+			if (pauseButtonAnimationOn)
+			{
+				DrawTexture(boton_pause, Gameplay::screenWidth - 100, 5, WHITE);
+			}
+			else
+			{
+				DrawTexture(negativePause, Gameplay::screenWidth - 100, 5, WHITE);
+			}
 			DrawTexturePro(player.player_texture, player.sourceRec, player.destRec, player.origin, player.rotation, WHITE);
 			drawMeteor(meteor);
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
@@ -250,7 +325,27 @@ namespace GameInit
 			}
 
 			DrawText(FormatText("%01i", points), (screenWidth / 2) - 20, screenHeight / 20, 30, LIGHTGRAY);
-			DrawText("PRESS M FOR RETURN TO THE MENU", screenWidth / 2 - (MeasureText("PRESS M FOR RETURN TO THE MENU", 15) / 2), screenHeight - screenHeight / 20, 15, BLACK);
+			if (pause) 
+			{
+				DrawTexture(fond_black, 0, 0, WHITE);
+				DrawTexture(asteroids, 0, 0, WHITE);
+				if (menuButtonAnimationOn)
+				{
+					DrawTexture(menu, Gameplay::screenWidth / 2 - menu.width / 2, Gameplay::screenHeight / 2, WHITE);
+				}
+				else
+				{
+					DrawTexture(negativeMenu, Gameplay::screenWidth / 2 - negativeMenu.width / 2, Gameplay::screenHeight / 2, WHITE);
+				}
+				if (exitButtonAnimationOn)
+				{
+					DrawTexture(exit, Gameplay::screenWidth / 2 - exit.width / 2, Gameplay::screenHeight / 2 + exit.height + 5, WHITE);
+				}
+				else
+				{
+					DrawTexture(negativeExit, Gameplay::screenWidth / 2 - exit.width / 2, Gameplay::screenHeight / 2 + exit.height + 5, WHITE);
+				}
+			}
 		}
 		void initMeteor(Meteor meteor[])
 		{
