@@ -28,19 +28,13 @@ namespace GameInit
 			//player.speed.y = cos(player.rotation*DEG2RAD);
 			if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
 			{
-				if (player.acceleration < 1) player.acceleration += 300;
+				if (player.acceleration < 400) player.acceleration = 400;
 			}
 			else
 			{
 				if (player.acceleration > 0) player.acceleration -= 150;
 				else if (player.acceleration < 0) player.acceleration = 0;
 			}
-			if (IsKeyDown(KEY_DOWN))
-			{
-				if (player.acceleration > 0) player.acceleration -= 300;
-				else if (player.acceleration < 0) player.acceleration = 0;
-			}
-
 			player.position.x += (player.speed.x*player.acceleration)* GetFrameTime();
 			player.position.y -= (player.speed.y*player.acceleration)* GetFrameTime();
 			if (player.position.x > screenWidth + shipHeight) player.position.x = -(shipHeight);

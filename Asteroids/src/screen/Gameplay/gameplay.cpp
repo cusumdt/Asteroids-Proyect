@@ -75,7 +75,7 @@ namespace GameInit
 		static Meteor meteor[TOTAL_METEOR];
 		static short int INIT_VELOCITY = 400;
 		static short int randomMusic = 0;
-		static const short int MAX_POINT = 1;
+		static const short int MAX_POINT = 5;
 		static const short int HEIGHT_BOX = (screenHeight / 15);
 		static const short int WIDTH_BOX = (screenWidth / 25);
 		static const short int RADIUS_BALL = (screenWidth / 45);
@@ -235,7 +235,7 @@ namespace GameInit
 			}
 			for (int i = 0; i < TOTAL_METEOR; i++)
 			{
-				//meteor[i].destRec = { meteor[i].position.x,meteor[i].position.y,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
+				meteor[i].destRec = { meteor[i].x,meteor[i].y,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
 			}
 			player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
 		}
@@ -259,14 +259,18 @@ namespace GameInit
 				meteor[i].meteor_texture = LoadTexture("res/meteor.png");
 				meteor[i].x = GetRandomValue(1, screenWidth);
 				meteor[i].y = GetRandomValue(1, screenHeight);
+				while (meteor[i].y>screenHeight / 3 && meteor[i].y<screenHeight - screenHeight / 3)
+				{
+					meteor[i].y = GetRandomValue(1, screenHeight);
+				}
 				meteor[i].position = Vector2{ meteor[i].x, meteor[i].y };
 				meteor[i].speed = Vector2{ SPEED_BALL_INIT, SPEED_BALL_INIT };
 				meteor[i].radius = RADIUS_BALL;
 				meteor[i].active = true;
 				meteor[i].dir = (Direction)GetRandomValue(1, 8);
 				meteor[i].sourceRec = { 0.0f,0.0f,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
-				meteor[i].destRec = { meteor[i].position.x,meteor[i].position.y,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
-				meteor[i].origin = { (float)meteor[i].x,(float)meteor[i].y };
+				meteor[i].destRec = { meteor[i].x,meteor[i].y,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
+				meteor[i].origin = { (float)meteor[i].meteor_texture.width/2,(float)meteor[i].meteor_texture.height/2 };
 
 			}
 		}
@@ -274,8 +278,7 @@ namespace GameInit
 		{
 			for (int i = 0; i < TOTAL_METEOR; i++)
 			{
-				DrawCircleV(meteor[i].position, meteor[i].radius, MAROON);
-				//DrawTexturePro(meteor[i].meteor_texture, meteor[i].sourceRec, meteor[i].destRec, meteor[i].origin, 100.0f, WHITE);
+				DrawTexturePro(meteor[i].meteor_texture, meteor[i].sourceRec, meteor[i].destRec, meteor[i].origin, 0.0f, WHITE);
 			}
 		}
 		static void checkColisionMeteor(Meteor meteor[])
