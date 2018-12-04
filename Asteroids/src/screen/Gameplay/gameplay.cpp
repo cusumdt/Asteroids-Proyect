@@ -97,7 +97,7 @@ namespace GameInit
 		static const short int INIT_SCORE = 0;
 		static const short int LIMIT_TOP = 10;
 		static const short int EXTRA_VELOCITY = 20;
-		static const short int PLAYER_MAX_SHOOTS = 10;
+		static const short int PLAYER_MAX_SHOOTS = 5;
 		static Sound fxWav;
 		static Sound fxWav2;
 		static Sound fxWav3;
@@ -110,6 +110,7 @@ namespace GameInit
 		static Shoot shoot[PLAYER_MAX_SHOOTS];
 		static short int points = 0;
 		static bool pause;
+		static bool firstStart=true;
 		//--------------------------------------------
 
 		bool left = false;
@@ -173,14 +174,14 @@ namespace GameInit
 				}
 				victory();
 				SetExitKey(0);
-				Logic_ship::mov_ship();
+				
 				if (IsKeyDown(KEY_M))
 				{
 					pause = !pause;
 				}
 				//---------------------------------------------------------
 				//Meteor Movement
-				movMeteor(meteor);
+			
 				//---------------------------------------------------------
 				//Bordes pantalla
 				for (int i = 0; i < TOTAL_METEOR; i++)
@@ -202,21 +203,32 @@ namespace GameInit
 					meteor[i].position = Vector2{ meteor[i].x, meteor[i].y };
 				}
 				//-------------------------------------------------------
-				if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-				{
-					for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
+		
+
+				if (!firstStart) {
+					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 					{
-						if (!shoot[i].active)
+						for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 						{
-							shoot[i].position = Vector2{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight) };
-							shoot[i].active = true;
-							shoot[i].speed.x = 1.5*sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
-							shoot[i].speed.y = 1.5*cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
-							shoot[i].rotation = player.rotation;
+							if (!shoot[i].active)
+							{
+								std::cout << i << std::endl;
+								shoot[i].position = Vector2{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight) };
+								shoot[i].active = true;
+								shoot[i].speed.x = 1.5*sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
+								shoot[i].speed.y = 1.5*cos(player.rotation*DEG2RAD)*PLAYER_SPEED;
+								shoot[i].rotation = player.rotation;
+								i = PLAYER_MAX_SHOOTS;
+							}
 						}
 					}
+					movMeteor(meteor);
+					Logic_ship::mov_ship();
 				}
-
+				if (IsKeyDown(KEY_SPACE)){
+					firstStart = false;
+				}
+			
 				// Shoot life timer
 				for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 				{
@@ -278,6 +290,10 @@ namespace GameInit
 				{
 					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
 					{
+						for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
+							shoot[i].active = false;
+						}
+						firstStart = true;
 						initMeteor(meteor);
 						points = INIT_SCORE;
 						player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
@@ -321,7 +337,7 @@ namespace GameInit
 			drawMeteor(meteor);
 			for (int i = 0; i < PLAYER_MAX_SHOOTS; i++)
 			{
-				if (shoot[i].active) DrawCircleV(shoot[i].position, shoot[i].radius, BLACK);
+				if (shoot[i].active) DrawCircleV(shoot[i].position, shoot[i].radius, WHITE);
 			}
 
 			DrawText(FormatText("%01i", points), (screenWidth / 2) - 20, screenHeight / 20, 30, LIGHTGRAY);
@@ -525,6 +541,7 @@ namespace GameInit
 		{
 			if (points >= MAX_POINT)
 			{
+				firstStart = true;
 				screen = WIN;
 				initMeteor(meteor);
 				points = INIT_SCORE;
@@ -534,6 +551,7 @@ namespace GameInit
 		}
 		static void defeat()
 		{
+			firstStart = true;
 			screen = DEFEAT;
 			initMeteor(meteor);
 			points = INIT_SCORE;
