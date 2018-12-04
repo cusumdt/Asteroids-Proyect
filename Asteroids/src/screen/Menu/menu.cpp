@@ -47,7 +47,7 @@ namespace GameInit
 			if (firstInit) 
 			{
 				firstInit = false;
-			if (Gameplay::screenWidth >= 1600)
+			if (screenWidth >= 1600)
 			{
 				fontSize = 40;
 				fontSizeTitle = 100;
@@ -78,12 +78,12 @@ namespace GameInit
 			quit= LoadTexture("res/quit.png");
 			negativeQuit = LoadTexture("res/quit2.png");
 			//recplay = {(float)play.width,(float)play.height,(float)Gameplay::screenWidth / 2 - play.width / 2 ,(float)Gameplay::screenHeight / 2 - play.height / 2 };
-			recplay = { (float)Gameplay::screenWidth / 2 - play.width / 2,(float)Gameplay::screenHeight / 2 - play.height,(float)play.width,(float)play.height };
-			recCredits= { (float)Gameplay::screenWidth / 2 - play.width / 2,(float)Gameplay::screenHeight / 2,(float)play.width,(float)play.height };
-			recHelp = { (float)Gameplay::screenWidth / 2 - help.width / 2,(float)Gameplay::screenHeight / 2  + help.height + 5,(float)help.width,(float)help.height };
-			recMuteOn = { (float)Gameplay::screenWidth / 2 - mute.width / 2,(float)Gameplay::screenHeight / 2  + mute.height * 2 + 5,(float)mute.width,(float)mute.height };
-			recExit = { (float)Gameplay::screenWidth / 2 - exit.width / 2,(float)Gameplay::screenHeight / 2 + exit.height * 3 + 5,(float)exit.width,(float)exit.height };
-			recQuit= { (float)Gameplay::screenWidth / 2 + help.width ,(float)Gameplay::screenHeight / 2 + help.height + help.height / 2  + 5,(float)quit.width,(float)quit.height };
+			recplay = { (float)screenWidth / 2 - play.width / 2,(float)screenHeight / 2 - play.height,(float)play.width,(float)play.height };
+			recCredits= { (float)screenWidth / 2 - play.width / 2,(float)screenHeight / 2,(float)play.width,(float)play.height };
+			recHelp = { (float)screenWidth / 2 - help.width / 2,(float)screenHeight / 2  + help.height + 5,(float)help.width,(float)help.height };
+			recMuteOn = { (float)screenWidth / 2 - mute.width / 2,(float)screenHeight / 2  + mute.height * 2 + 5,(float)mute.width,(float)mute.height };
+			recExit = { (float)screenWidth / 2 - exit.width / 2,(float)screenHeight / 2 + exit.height * 3 + 5,(float)exit.width,(float)exit.height };
+			recQuit= { (float)screenWidth / 2 + help.width ,(float)screenHeight / 2 + help.height + help.height / 2  + 5,(float)quit.width,(float)quit.height };
 			}
 		}
 
@@ -92,38 +92,38 @@ namespace GameInit
 			DrawTexture(fond, 0, 0, WHITE);
 			if (playButtonAnimationOn)
 			{
-				DrawTexture(play, Gameplay::screenWidth / 2 - play.width / 2, Gameplay::screenHeight / 2 -play.height, WHITE);
+				DrawTexture(play, screenWidth / 2 - play.width / 2, screenHeight / 2 -play.height, WHITE);
 			}
 			else
 			{
-				DrawTexture(negativePlay, Gameplay::screenWidth / 2 - negativePlay.width / 2, Gameplay::screenHeight / 2 - play.height, WHITE);
+				DrawTexture(negativePlay, screenWidth / 2 - negativePlay.width / 2, screenHeight / 2 - play.height, WHITE);
 			}
 			if (creditsButtonAnimationOn)
 			{
-				DrawTexture(credits, Gameplay::screenWidth / 2 - credits.width / 2, Gameplay::screenHeight / 2, WHITE);
+				DrawTexture(credits, screenWidth / 2 - credits.width / 2, screenHeight / 2, WHITE);
 			}
 			else
 			{
-				DrawTexture(negativeCredits, Gameplay::screenWidth / 2 - negativeCredits.width / 2, Gameplay::screenHeight / 2, WHITE);
+				DrawTexture(negativeCredits, screenWidth / 2 - negativeCredits.width / 2, screenHeight / 2, WHITE);
 			}
 
 			if (helpButtonAnimationOn)
 			{
-				DrawTexture(help, Gameplay::screenWidth / 2 - help.width / 2, Gameplay::screenHeight / 2 + help.height + 5, WHITE);
+				DrawTexture(help, screenWidth / 2 - help.width / 2, screenHeight / 2 + help.height + 5, WHITE);
 			}
 			else
 			{
-				DrawTexture(negativeHelp, Gameplay::screenWidth / 2 - help.width / 2, Gameplay::screenHeight / 2 + help.height + 5, WHITE);
+				DrawTexture(negativeHelp, screenWidth / 2 - help.width / 2, screenHeight / 2 + help.height + 5, WHITE);
 			}
 			if (muteOnButtonAnimationOn)
 			{
 				if (music)
 				{
-					DrawTexture(mute, Gameplay::screenWidth / 2 - mute.width / 2, Gameplay::screenHeight / 2 + mute.height * 2 + 5, WHITE);
+					DrawTexture(mute, screenWidth / 2 - mute.width / 2, screenHeight / 2 + mute.height * 2 + 5, WHITE);
 				}
 				else
 				{
-					DrawTexture(on, Gameplay::screenWidth / 2 - mute.width / 2, Gameplay::screenHeight / 2 + mute.height * 2 + 5, WHITE);
+					DrawTexture(on, screenWidth / 2 - mute.width / 2, screenHeight / 2 + mute.height * 2 + 5, WHITE);
 				}
 
 			}
@@ -131,35 +131,35 @@ namespace GameInit
 			{
 				if (music)
 				{
-					DrawTexture(negativeMute, Gameplay::screenWidth / 2 - mute.width / 2, Gameplay::screenHeight / 2 + mute.height * 2 + 5, WHITE);
+					DrawTexture(negativeMute, screenWidth / 2 - mute.width / 2, screenHeight / 2 + mute.height * 2 + 5, WHITE);
 				}
 				else
 				{
-					DrawTexture(negativeOn, Gameplay::screenWidth / 2 - mute.width / 2, Gameplay::screenHeight / 2 + mute.height * 2 + 5, WHITE);
+					DrawTexture(negativeOn, screenWidth / 2 - mute.width / 2, screenHeight / 2 + mute.height * 2 + 5, WHITE);
 				}
 			}
 			if (exitButtonAnimationOn)
 			{
-				DrawTexture(exit, Gameplay::screenWidth / 2 - exit.width / 2, Gameplay::screenHeight / 2 + exit.height * 3 + 5, WHITE);
+				DrawTexture(exit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height * 3 + 5, WHITE);
 			}
 			else
 			{
-				DrawTexture(negativeExit, Gameplay::screenWidth / 2 - exit.width / 2, Gameplay::screenHeight / 2 + exit.height * 3 + 5, WHITE);
+				DrawTexture(negativeExit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height * 3 + 5, WHITE);
 			}
-			DrawText("v1.0", Gameplay::screenWidth / 2 - (MeasureText("v1.0", 25) / 2), Gameplay::screenHeight - Gameplay::screenHeight / 20, 25, BLACK);
+			DrawText("v1.0", screenWidth / 2 - (MeasureText("v1.0", 25) / 2), screenHeight - screenHeight / 20, 25, BLACK);
 			if (settings)
 			{
-				DrawRectangle(Gameplay::screenWidth / 2 - (MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) / 2) - 5, Gameplay::screenHeight - Gameplay::screenHeight / 3, MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) + 10, fontSize * 3 + 15, LIGHTGRAY);
-				DrawRectangleLines(Gameplay::screenWidth / 2 - (MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) / 2) - 5, Gameplay::screenHeight - Gameplay::screenHeight / 3, MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) + 10, fontSize * 3 + 15, GOLD);
-				DrawText("RightClick -> Move", Gameplay::screenWidth / 2 - (MeasureText("RightClick -> Move", fontSize) / 2), Gameplay::screenHeight - Gameplay::screenHeight / 3 + 5, fontSize, WHITE);
-				DrawText("LeftClick -> Shoot", Gameplay::screenWidth / 2 - (MeasureText("LeftClick -> Shoot", fontSize) / 2), Gameplay::screenHeight - Gameplay::screenHeight / 3 + fontSize * 2 + 5, fontSize, WHITE);
+				DrawRectangle(screenWidth / 2 - (MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) / 2) - 5, screenHeight - screenHeight / 3, MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) + 10, fontSize * 3 + 15, LIGHTGRAY);
+				DrawRectangleLines(screenWidth / 2 - (MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) / 2) - 5, screenHeight - screenHeight / 3, MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) + 10, fontSize * 3 + 15, GOLD);
+				DrawText("RightClick -> Move", screenWidth / 2 - (MeasureText("RightClick -> Move", fontSize) / 2), screenHeight - screenHeight / 3 + 5, fontSize, WHITE);
+				DrawText("LeftClick -> Shoot", screenWidth / 2 - (MeasureText("LeftClick -> Shoot", fontSize) / 2), screenHeight - screenHeight / 3 + fontSize * 2 + 5, fontSize, WHITE);
 				if (quitButtonAnimationOn)
 				{
-					DrawTexture(quit, Gameplay::screenWidth / 2 +help.width, Gameplay::screenHeight / 2 + help.height +help.height/2 + 5, WHITE);
+					DrawTexture(quit, screenWidth / 2 +help.width, screenHeight / 2 + help.height +help.height/2 + 5, WHITE);
 				}
 				else
 				{
-					DrawTexture(negativeQuit, Gameplay::screenWidth / 2 + help.width, Gameplay::screenHeight / 2 + help.height + help.height / 2 + 5, WHITE);
+					DrawTexture(negativeQuit, screenWidth / 2 + help.width, screenHeight / 2 + help.height + help.height / 2 + 5, WHITE);
 				}
 			}
 		}

@@ -13,6 +13,8 @@ namespace GameInit
 	extern Screen screen;
 	extern bool music;
 	extern bool endGame;
+	extern int screenWidth;
+	extern int screenHeight;
 	//---------------------------------------------
 	void LoadScreen();
 	//---------------------------------------------

@@ -5,7 +5,7 @@
 #include <cmath>
 
 #include "raylib.h"
-
+#include "Game\game.h"
 #include "screen/Gameplay/gameplay.h"
 
 namespace GameInit 

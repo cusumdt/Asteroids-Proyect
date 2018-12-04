@@ -80,8 +80,6 @@ namespace GameInit
 		static void defeat();
 		// Initialization
 		//-------------------------------------------- Statics
-		int screenWidth = 1600;
-		int screenHeight = 900;
 		static int checkGame = 1;
 		static const int TOTAL_METEOR = 10;
 		static Rectangle box2;
@@ -147,15 +145,15 @@ namespace GameInit
 	
 			menu = LoadTexture("res/boton_menu.png");
 			negativeMenu = LoadTexture("res/boton_menu2.png");
-			exit = LoadTexture("res/exit.png");
-			negativeExit = LoadTexture("res/exit2.png");
+			exit = LoadTexture("res/return.png");
+			negativeExit = LoadTexture("res/return2.png");
 			fond_black = LoadTexture("res/fondo_oscuridad.png");
 			asteroids = LoadTexture("res/asteroids.png");
 			boton_pause= LoadTexture("res/pause.png");
 			negativePause= LoadTexture("res/pause2.png");
-			recMenu = { (float)Gameplay::screenWidth / 2 - menu.width / 2,(float)Gameplay::screenHeight / 2 ,(float)menu.width,(float)menu.height };
-			recExit = { (float)Gameplay::screenWidth / 2 - exit.width / 2,(float)Gameplay::screenHeight / 2 + exit.height + 5,(float)exit.width,(float)exit.height };
-			recPause = { (float)Gameplay::screenWidth - 100, (float)5,(float)boton_pause.width,(float)boton_pause.height };
+			recMenu = { (float)screenWidth / 2 - menu.width / 2,(float)screenHeight / 2 ,(float)menu.width,(float)menu.height };
+			recExit = { (float)screenWidth / 2 - exit.width / 2,(float)screenHeight / 2 + exit.height + 5,(float)exit.width,(float)exit.height };
+			recPause = { (float)screenWidth - 100, (float)5,(float)boton_pause.width,(float)boton_pause.height };
 		}
 
 
@@ -334,11 +332,11 @@ namespace GameInit
 			DrawTexture(fond, 0, 0, WHITE);
 			if (pauseButtonAnimationOn)
 			{
-				DrawTexture(boton_pause, Gameplay::screenWidth - 100, 5, WHITE);
+				DrawTexture(boton_pause,screenWidth - 100, 5, WHITE);
 			}
 			else
 			{
-				DrawTexture(negativePause, Gameplay::screenWidth - 100, 5, WHITE);
+				DrawTexture(negativePause, screenWidth - 100, 5, WHITE);
 			}
 			DrawTexturePro(player.player_texture, player.sourceRec, player.destRec, player.origin, player.rotation, WHITE);
 			drawMeteor(meteor);
@@ -350,11 +348,11 @@ namespace GameInit
 			DrawText(FormatText("%01i", points), (screenWidth / 2) - 20, screenHeight / 20, 30, LIGHTGRAY);
 			if (firstStart && !defeatStatus) 
 			{
-				DrawText("Press Space to Start", Gameplay::screenWidth / 2 - (MeasureText("Press Space to Start", 30) / 2), Gameplay::screenHeight / 4,30, WHITE);
+				DrawText("Press Space to Start", screenWidth / 2 - (MeasureText("Press Space to Start", 30) / 2), screenHeight / 4,30, WHITE);
 			}
 			if (defeatStatus)
 			{
-				DrawText("You Lose!", Gameplay::screenWidth / 2 - (MeasureText("You Lose!", 30) / 2), Gameplay::screenHeight / 4, 30, WHITE);
+				DrawText("You Lose!", screenWidth / 2 - (MeasureText("You Lose!", 30) / 2), screenHeight / 4, 30, WHITE);
 			}
 			if (pause) 
 			{
@@ -362,19 +360,19 @@ namespace GameInit
 				DrawTexture(asteroids, 0, 0, WHITE);
 				if (menuButtonAnimationOn)
 				{
-					DrawTexture(menu, Gameplay::screenWidth / 2 - menu.width / 2, Gameplay::screenHeight / 2, WHITE);
+					DrawTexture(menu, screenWidth / 2 - menu.width / 2, screenHeight / 2, WHITE);
 				}
 				else
 				{
-					DrawTexture(negativeMenu, Gameplay::screenWidth / 2 - negativeMenu.width / 2, Gameplay::screenHeight / 2, WHITE);
+					DrawTexture(negativeMenu, screenWidth / 2 - negativeMenu.width / 2, screenHeight / 2, WHITE);
 				}
 				if (exitButtonAnimationOn)
 				{
-					DrawTexture(exit, Gameplay::screenWidth / 2 - exit.width / 2, Gameplay::screenHeight / 2 + exit.height + 5, WHITE);
+					DrawTexture(exit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height + 5, WHITE);
 				}
 				else
 				{
-					DrawTexture(negativeExit, Gameplay::screenWidth / 2 - exit.width / 2, Gameplay::screenHeight / 2 + exit.height + 5, WHITE);
+					DrawTexture(negativeExit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height + 5, WHITE);
 				}
 			}
 		}
@@ -578,7 +576,25 @@ namespace GameInit
 					screen = DEFEAT;	
 				}
 		}
-
+		void CloseGameplay()
+		{
+			UnloadTexture(meteor[0].meteor_texture);
+			UnloadTexture(player.player_texture);
+			UnloadTexture(menu);
+			UnloadTexture(negativeMenu);
+			UnloadTexture(exit);
+			UnloadTexture(negativeExit);
+			UnloadTexture(asteroids);
+			UnloadTexture(fond_black);
+			UnloadTexture(boton_pause);
+			UnloadTexture(negativePause);
+			UnloadTexture(fond);
+			UnloadTexture(asteroids);
+			UnloadSound(fxWav);
+			UnloadSound(fxWav2);
+			UnloadSound(fxWav3);
+			UnloadSound(fxWav4);
+		}
 	}
 
 }

@@ -10,16 +10,17 @@
 //#define MUSIC_ON
 namespace GameInit
 {
+	int screenWidth = 1600;
+	int screenHeight = 900;
 	static void Init();
 	static void Update();
 	static void Draw();
 	static void Close();
 	bool endGame = false;
-	Texture2D texture;
 	Music MusicLoop;
 	void Init() 
 	{
-		InitWindow(Gameplay::screenWidth, Gameplay::screenHeight, "Asteroids");
+		InitWindow(screenWidth, screenHeight, "Asteroids");
 		InitAudioDevice();
 		MusicLoop = LoadMusicStream("res/music.ogg");
 		PlayMusicStream(MusicLoop);
@@ -88,11 +89,11 @@ namespace GameInit
 
 	void Close() {
 			UnloadMusicStream(MusicLoop);   // Unload music stream buffers from RAM
-			CloseAudioDevice();
-			UnloadTexture(texture);       // Texture unloading
+			Gameplay::CloseGameplay();
 			initMenu::UnloadTextureMenu();
 			initWin::closeWin();
 			initDefeat::CloseDefeat();
+			CloseAudioDevice();
 			CloseWindow();
 	}
 	void LoadScreen()

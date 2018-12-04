@@ -8,8 +8,7 @@ namespace GameInit
 	namespace Gameplay
 	{
 		extern bool firstInit;
-		extern int screenWidth;
-		extern int screenHeight;
+	
 		extern bool left;
 		extern bool right;
 		void initGame();
@@ -30,6 +29,7 @@ namespace GameInit
 		};
 		extern Player player;
 		extern float shipHeight;
+		void CloseGameplay();
 	}
 }
 #endif
