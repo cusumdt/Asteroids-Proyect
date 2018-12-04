@@ -111,6 +111,8 @@ namespace GameInit
 		static short int points = 0;
 		static bool pause;
 		static bool firstStart=true;
+		static float timeDefeat = 0.0f;
+		static bool defeatStatus = false;
 		//--------------------------------------------
 
 		bool left = false;
@@ -139,6 +141,7 @@ namespace GameInit
 			player.collider = Vector3{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight / 2.5f), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight / 2.5f), 12 };
 			player.color = LIGHTGRAY;
 			//--------------------------------
+			meteor[0].meteor_texture = LoadTexture("res/meteor.png");
 			initMeteor(meteor);
 			initShoot(shoot);
 	
@@ -160,6 +163,11 @@ namespace GameInit
 		{
 			if (!pause)
 			{
+				if (defeatStatus)
+				{
+					timeDefeat += 1 * GetFrameTime();
+					defeat();
+				}
 				if (CheckCollisionPointRec(GetMousePosition(), recPause))
 				{
 					if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -196,8 +204,7 @@ namespace GameInit
 
 				}
 				//--------------------------------------------------------
-				//Colision barras/pelota
-				checkColisionMeteor(meteor);
+		
 				for (int i = 0; i < TOTAL_METEOR; i++)
 				{
 					meteor[i].position = Vector2{ meteor[i].x, meteor[i].y };
@@ -212,7 +219,6 @@ namespace GameInit
 						{
 							if (!shoot[i].active)
 							{
-								std::cout << i << std::endl;
 								shoot[i].position = Vector2{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight) };
 								shoot[i].active = true;
 								shoot[i].speed.x = 1.5*sin(player.rotation*DEG2RAD)*PLAYER_SPEED;
@@ -224,6 +230,7 @@ namespace GameInit
 					}
 					movMeteor(meteor);
 					Logic_ship::mov_ship();
+					checkColisionMeteor(meteor);
 				}
 				if (IsKeyDown(KEY_SPACE)){
 					firstStart = false;
@@ -280,7 +287,7 @@ namespace GameInit
 				}
 				for (int i = 0; i < TOTAL_METEOR; i++)
 				{
-					meteor[i].destRec = { meteor[i].x,meteor[i].y,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
+					meteor[i].destRec = { meteor[i].x,meteor[i].y,(float)meteor[0].meteor_texture.width,(float)meteor[0].meteor_texture.height };
 				}
 				player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
 			}
@@ -341,6 +348,14 @@ namespace GameInit
 			}
 
 			DrawText(FormatText("%01i", points), (screenWidth / 2) - 20, screenHeight / 20, 30, LIGHTGRAY);
+			if (firstStart && !defeatStatus) 
+			{
+				DrawText("Press Space to Start", Gameplay::screenWidth / 2 - (MeasureText("Press Space to Start", 30) / 2), Gameplay::screenHeight / 4,30, WHITE);
+			}
+			if (defeatStatus)
+			{
+				DrawText("You Lose!", Gameplay::screenWidth / 2 - (MeasureText("You Lose!", 30) / 2), Gameplay::screenHeight / 4, 30, WHITE);
+			}
 			if (pause) 
 			{
 				DrawTexture(fond_black, 0, 0, WHITE);
@@ -367,7 +382,6 @@ namespace GameInit
 		{
 			for (int i = 0; i < TOTAL_METEOR; i++)
 			{
-				meteor[i].meteor_texture = LoadTexture("res/meteor.png");
 				meteor[i].x = GetRandomValue(1, screenWidth);
 				meteor[i].y = GetRandomValue(1, screenHeight);
 				while (meteor[i].y>screenHeight / 3 && meteor[i].y<screenHeight - screenHeight / 3)
@@ -379,9 +393,9 @@ namespace GameInit
 				meteor[i].radius = RADIUS_BALL;
 				meteor[i].active = true;
 				meteor[i].dir = (Direction)GetRandomValue(1, 8);
-				meteor[i].sourceRec = { 0.0f,0.0f,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
-				meteor[i].destRec = { meteor[i].x,meteor[i].y,(float)meteor[i].meteor_texture.width,(float)meteor[i].meteor_texture.height };
-				meteor[i].origin = { (float)meteor[i].meteor_texture.width/2,(float)meteor[i].meteor_texture.height/2 };
+				meteor[i].sourceRec = { 0.0f,0.0f,(float)meteor[0].meteor_texture.width,(float)meteor[0].meteor_texture.height };
+				meteor[i].destRec = { meteor[i].x,meteor[i].y,(float)meteor[0].meteor_texture.width,(float)meteor[0].meteor_texture.height };
+				meteor[i].origin = { (float)meteor[0].meteor_texture.width/2,(float)meteor[0].meteor_texture.height/2 };
 
 			}
 		}
@@ -389,7 +403,7 @@ namespace GameInit
 		{
 			for (int i = 0; i < TOTAL_METEOR; i++)
 			{
-				DrawTexturePro(meteor[i].meteor_texture, meteor[i].sourceRec, meteor[i].destRec, meteor[i].origin, 0.0f, WHITE);
+				DrawTexturePro(meteor[0].meteor_texture, meteor[i].sourceRec, meteor[i].destRec, meteor[i].origin, 0.0f, WHITE);
 			}
 		}
 		static void checkColisionMeteor(Meteor meteor[])
@@ -441,7 +455,6 @@ namespace GameInit
 				player.collider = Vector3{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight / 2.5f), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight / 2.5f), 12 };
 				if (CheckCollisionCircles(Vector2{ player.collider.x, player.collider.y }, player.collider.z, meteor[i].position, meteor[i].radius) && meteor[i].active)
 				{
-					instanceThisMeteor(meteor, i);
 					if (music)
 					{
 						randomMusic = GetRandomValue(1, 4);
@@ -552,13 +565,20 @@ namespace GameInit
 		static void defeat()
 		{
 			firstStart = true;
-			screen = DEFEAT;
-			initMeteor(meteor);
-			points = INIT_SCORE;
-			player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
-			player.rotation = 0;
-
+			defeatStatus = true;
+				if (timeDefeat >= 2)
+				{
+		
+					defeatStatus = false;
+					timeDefeat = 0;
+					initMeteor(meteor);
+					points = INIT_SCORE;
+					player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
+					player.rotation = 0;
+					screen = DEFEAT;	
+				}
 		}
+
 	}
 
 }

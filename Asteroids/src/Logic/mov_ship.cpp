@@ -40,10 +40,22 @@ namespace GameInit
 			}
 			player.position.x += (player.speed.x*player.acceleration)* GetFrameTime();
 			player.position.y -= (player.speed.y*player.acceleration)* GetFrameTime();
-			if (player.position.x > screenWidth + shipHeight) player.position.x = -(shipHeight);
-			else if (player.position.x < -(shipHeight)) player.position.x = screenWidth + shipHeight;
-			if (player.position.y >(screenHeight + shipHeight)) player.position.y = -(shipHeight);
-			else if (player.position.y < -(shipHeight)) player.position.y = screenHeight + shipHeight;
+			if (player.position.x > screenWidth + shipHeight) 
+			{
+				player.position.x = -(shipHeight);
+			}
+			else if (player.position.x < -(shipHeight))
+			{
+				player.position.x = screenWidth + shipHeight;
+			}
+			if (player.position.y > (screenHeight + shipHeight)) 
+			{
+				player.position.y = -(shipHeight);
+			}
+			else if (player.position.y < -(shipHeight))
+			{
+				player.position.y = screenHeight + shipHeight;
+			}
 		}
 	}
 }
