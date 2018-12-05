@@ -14,8 +14,12 @@ namespace GameInit
 	static Texture2D menu;
 	static Texture2D negativeMenu;
 	static  Rectangle recMenu;
+	static Texture2D restart;
+	static Texture2D negativeRestart;
+	static Rectangle recRestart;
 	static bool menuButtonAnimationOn;
 	static bool exitButtonAnimationOn;
+	static bool restartButtonAnimationOn;
 	static bool firstInit = true;
 
 	static void initWin()
@@ -28,8 +32,11 @@ namespace GameInit
 			exit = LoadTexture("res/exit.png");
 			negativeExit = LoadTexture("res/exit2.png");
 			fond = LoadTexture("res/menu.png");
+			restart = LoadTexture("res/restart.png");
+			negativeRestart = LoadTexture("res/restart2.png");
 			recMenu = { (float)screenWidth / 2 - menu.width / 2,(float)screenHeight / 2 ,(float)menu.width,(float)menu.height };
-			recExit = { (float)screenWidth / 2 - exit.width / 2,(float)screenHeight / 2 + exit.height + 5,(float)exit.width,(float)exit.height };
+			recExit = { (float)screenWidth / 2 - exit.width / 2,(float)screenHeight / 2 + exit.height*2 + 5,(float)exit.width,(float)exit.height };
+			recRestart = { (float)screenWidth / 2 - restart.width / 2,(float)screenHeight / 2 + restart.height + 5,(float)restart.width,(float)restart.height };
 		}
 	}
 	void UpdateWin()
@@ -60,6 +67,19 @@ namespace GameInit
 		{
 			exitButtonAnimationOn = true;
 		}
+		if (CheckCollisionPointRec(GetMousePosition(), recRestart))
+		{
+			restartButtonAnimationOn = false;
+
+			if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+			{
+				screen = GAME;
+			}
+		}
+		else
+		{
+			restartButtonAnimationOn = true;
+		}
 	}
 	void DrawWin()
 	{
@@ -82,11 +102,19 @@ namespace GameInit
 		}
 		if (exitButtonAnimationOn)
 		{
-			DrawTexture(exit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height + 5, WHITE);
+			DrawTexture(exit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height *2 + 5, WHITE);
 		}
 		else
 		{
-			DrawTexture(negativeExit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height + 5, WHITE);
+			DrawTexture(negativeExit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height*2 + 5, WHITE);
+		}
+		if (restartButtonAnimationOn)
+		{
+			DrawTexture(restart, screenWidth / 2 - restart.width / 2, screenHeight / 2 + restart.height + 5, WHITE);
+		}
+		else
+		{
+			DrawTexture(negativeRestart, screenWidth / 2 - restart.width / 2, screenHeight / 2 + restart.height + 5, WHITE);
 		}
 	}
 	void closeWin()

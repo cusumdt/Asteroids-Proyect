@@ -630,7 +630,7 @@ namespace GameInit
 		UnloadSound(fxWav3);
 		UnloadSound(fxWav4);
 	}
-	static void restartPlayer() 
+	static void restartPlayer()
 	{
 		player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
 		player.speed = Vector2{ 0, 0 };
