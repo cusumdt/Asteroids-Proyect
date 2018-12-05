@@ -38,13 +38,15 @@ namespace GameInit
 	static Rectangle recMuteOn;
 	static Rectangle recExit;
 	static Rectangle recQuit;
+	static const int screenWidthLimit = 1600;
 	static bool firstInit = true;
+
 	static void initSize()
 	{
 		if (firstInit)
 		{
 			firstInit = false;
-			if (screenWidth >= 1600)
+			if (screenWidth >= screenWidthLimit)
 			{
 				fontSize = 40;
 				fontSizeTitle = 100;
@@ -142,7 +144,7 @@ namespace GameInit
 		{
 			DrawTexture(negativeExit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height * 3 + 5, WHITE);
 		}
-		DrawText("v1.0", screenWidth / 2 - (MeasureText("v1.0", 25) / 2), screenHeight - screenHeight / 20, 25, BLACK);
+		DrawText("v1.1", screenWidth / 2 - (MeasureText("v1.1", 25) / 2), screenHeight - screenHeight / 20, 25, BLACK);
 		if (settings)
 		{
 			DrawRectangle(screenWidth / 2 - (MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) / 2) - 5, screenHeight - screenHeight / 3, MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) + 10, fontSize * 3 + 15, LIGHTGRAY);

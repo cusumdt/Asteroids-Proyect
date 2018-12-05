@@ -21,6 +21,7 @@ namespace GameInit
 	static bool exitButtonAnimationOn;
 	static bool restartButtonAnimationOn;
 	static bool firstInit = true;
+	static const int screenWidthLimit = 1600;
 	static 	void initDefeat()
 	{
 		if (firstInit)
@@ -84,7 +85,7 @@ namespace GameInit
 	{
 		static int fontSizeTitle = 50;
 		static int fontSize = 20;
-		if (screenWidth >= 1600)
+		if (screenWidth >= screenWidthLimit)
 		{
 			fontSize = 40;
 			fontSizeTitle = 100;

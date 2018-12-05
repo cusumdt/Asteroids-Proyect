@@ -14,7 +14,7 @@ namespace GameInit
 	static bool menuButtonAnimationOn;
 	static bool exitButtonAnimationOn;
 	static bool firstInit = true;
-
+	static const int screenWidthLimit = 1600;
 	static int fontSize = 20;
 	static void initCredits()
 	{
@@ -30,7 +30,7 @@ namespace GameInit
 	void UpdateCredits()
 	{
 		initCredits();
-		if (screenWidth >= 1600)
+		if (screenWidth >= screenWidthLimit)
 		{
 			fontSize = 40;
 		}
@@ -65,7 +65,7 @@ namespace GameInit
 		DrawText("Programmer: Cusumano Cristian", screenWidth / 2 - (MeasureText("Programmer: Cusumano Cristian", fontSize) / 2), positionY + fontSize * 2, fontSize, GOLD);
 		DrawText("Music and Efects By: Cusumano Cristian", screenWidth / 2 - (MeasureText("Music and Efects By: Cusumano Cristian", fontSize) / 2), positionY + fontSize * 4 + 5, fontSize, GOLD);
 		DrawText("Tools: Raylib - BoscaCeoil - MusicMaker - Photoshop", screenWidth / 2 - (MeasureText("Tools: Raylib - BoscaCeoil - MusicMaker - Photoshop", fontSize) / 2), positionY + fontSize * 6 + 5, fontSize, GOLD);
-		DrawText("v1.0", screenWidth / 2 - (MeasureText("v1.0", fontSize) / 2), positionY + fontSize * 13 + 5, fontSize, GOLD);
+		DrawText("v1.1", screenWidth / 2 - (MeasureText("v1.1", fontSize) / 2), positionY + fontSize * 13 + 5, fontSize, GOLD);
 	}
 	void CloseCredits()
 	{

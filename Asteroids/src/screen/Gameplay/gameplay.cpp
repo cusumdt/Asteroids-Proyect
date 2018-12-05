@@ -89,7 +89,7 @@ namespace GameInit
 	static Meteor meteor[TOTAL_METEOR];
 	static short int INIT_VELOCITY = 400;
 	static short int randomMusic = 0;
-	static const short int MAX_POINT = 5;
+	static const short int MAX_POINT = 15;
 	static const short int HEIGHT_BOX = (screenHeight / 15);
 	static const short int WIDTH_BOX = (screenWidth / 25);
 	static const short int RADIUS_BALL = (screenWidth / 45);
@@ -98,7 +98,7 @@ namespace GameInit
 	static const short int INIT_SCORE = 0;
 	static const short int LIMIT_TOP = 10;
 	static const short int EXTRA_VELOCITY = 20;
-	static const short int PLAYER_MAX_SHOOTS = 5;
+	static const short int PLAYER_MAX_SHOOTS = 10;
 	static Sound fxWav;
 	static Sound fxWav2;
 	static Sound fxWav3;
@@ -301,6 +301,8 @@ namespace GameInit
 					for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
 						shoot[i].active = false;
 					}
+					defeatStatus = false;
+					timeDefeat = 0;
 					restartPlayer();
 					firstStart = true;
 					initMeteor(meteor);
@@ -331,6 +333,8 @@ namespace GameInit
 					points = INIT_SCORE;
 					player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
 					player.rotation = 0;
+					defeatStatus = false;
+					timeDefeat = 0;
 					pause = !pause;
 				}
 			}
