@@ -2,11 +2,8 @@
 #define MENU_H
 namespace GameInit
 {
-	namespace initMenu
-	{
-		void UpdateMenu();
-		void DrawMenu();	
-		void UnloadTextureMenu();
-	}
+	void UpdateMenu();
+	void DrawMenu();
+	void UnloadTextureMenu();
 }
 #endif

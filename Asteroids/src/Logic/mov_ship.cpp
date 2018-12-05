@@ -14,18 +14,13 @@ namespace GameInit
 	{
 		void mov_ship()
 		{
-			float delta_y;
-			float delta_x;
-			using namespace Gameplay;
-		
-			//player.speed.x = sin(player.rotation*DEG2RAD);
-
+			static float delta_y;
+			static float delta_x;
 			delta_y = player.destRec.y - GetMouseY();
 			delta_x = player.destRec.x - GetMouseX();
 			player.rotation = (atan2(delta_y, delta_x)*RAD2DEG)-90;
 			player.speed.x = sin(player.rotation*DEG2RAD);
 			player.speed.y = cos(player.rotation*DEG2RAD);
-			//player.speed.y = cos(player.rotation*DEG2RAD);
 			if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
 			{
 				if (player.acceleration < 400) player.acceleration = 400;

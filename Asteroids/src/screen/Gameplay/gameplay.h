@@ -5,8 +5,6 @@
 
 namespace GameInit
 {
-	namespace Gameplay
-	{
 		extern bool firstInit;
 	
 		extern bool left;
@@ -30,6 +28,5 @@ namespace GameInit
 		extern Player player;
 		extern float shipHeight;
 		void CloseGameplay();
-	}
 }
 #endif

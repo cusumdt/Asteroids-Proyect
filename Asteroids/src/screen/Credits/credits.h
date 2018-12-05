@@ -2,12 +2,9 @@
 #define CREDITS_H
 namespace GameInit
 {
-	namespace initCredits
-	{
-		void UpdateCredits();
-		void DrawCredits();
-	}
-
+	void UpdateCredits();
+	void DrawCredits();
+	void CloseCredits();
 }
 #endif // !CREDITS_H
 

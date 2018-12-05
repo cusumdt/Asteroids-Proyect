@@ -17,8 +17,8 @@ namespace GameInit
 	static void Draw();
 	static void Close();
 	bool endGame = false;
-	Music MusicLoop;
-	void Init() 
+	static Music MusicLoop;
+	static void Init()
 	{
 		InitWindow(screenWidth, screenHeight, "Asteroids");
 		InitAudioDevice();
@@ -26,7 +26,7 @@ namespace GameInit
 		PlayMusicStream(MusicLoop);
 	}
 
-	void Update() 
+	static void Update()
 	{
 		if (music) 
 		{
@@ -35,51 +35,52 @@ namespace GameInit
 		switch (screen)
 		{
 		case GAME:
-			if (Gameplay::firstInit)
+			if (firstInit)
 			{
 
 
-				Gameplay::initGame();
-				Gameplay::firstInit = false;
+				initGame();
+				firstInit = false;
 			}
-			Gameplay::updateGame();
+			updateGame();
 			break;
 		case MENU:
-			initMenu::UpdateMenu();
+			UpdateMenu();
 			break;
 		case WIN:
-			initWin::UpdateWin();
+			UpdateWin();
 			break;
 		case CREDITS:
-			initCredits::UpdateCredits();
+			UpdateCredits();
 			break;
 		case DEFEAT:
-			initDefeat::UpdateDefeat();
+			UpdateDefeat();
 			break;
 		default:
 			break;
 		}
 	}
 	
-	void Draw() {
+	static void Draw()
+	{
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
 		switch (screen)
 		{
 		case GAME:
-			Gameplay::DrawGame();
+			DrawGame();
 			break;
 		case MENU:
-			initMenu::DrawMenu();
+			DrawMenu();
 			break;
 		case WIN:
-			initWin::DrawWin();
+			DrawWin();
 			break;
 		case CREDITS:
-			initCredits::DrawCredits();
+			DrawCredits();
 			break;
 		case DEFEAT:
-			initDefeat::DrawDefeat();
+			DrawDefeat();
 			break;
 		}
 		EndDrawing();
@@ -87,16 +88,18 @@ namespace GameInit
 
 
 
-	void Close() {
+	static void Close()
+	{
 			UnloadMusicStream(MusicLoop);   // Unload music stream buffers from RAM
-			Gameplay::CloseGameplay();
-			initMenu::UnloadTextureMenu();
-			initWin::closeWin();
-			initDefeat::CloseDefeat();
+			CloseGameplay();
+			UnloadTextureMenu();
+			closeWin();
+			CloseDefeat();
 			CloseAudioDevice();
 			CloseWindow();
+			CloseCredits();
 	}
-	void LoadScreen()
+	 void LoadScreen()
 	{
 		Init();
 		// Main game loop
@@ -106,7 +109,6 @@ namespace GameInit
 			Draw();
 		}
 		//--------------------------------------------------------------------------------------   
-	
 		Close();
 		// Close window and OpenGL context
 		//--------------------------------------------------------------------------------------

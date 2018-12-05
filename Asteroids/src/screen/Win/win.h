@@ -2,12 +2,10 @@
 #define WIN_H
 namespace GameInit
 {
-	namespace initWin
-	{
-		void UpdateWin();
-		void DrawWin();
-		void closeWin();
-	}
+	void UpdateWin();
+	void DrawWin();
+	void closeWin();
+	
 }
 #endif // !WIN_H
 
