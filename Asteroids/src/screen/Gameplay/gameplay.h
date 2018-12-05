@@ -16,7 +16,7 @@ namespace GameInit
 			Texture2D player_texture;
 			Vector2 position;
 			Vector2 speed;
-			float acceleration;
+			Vector2 acceleration;
 			float rotation;
 			Vector3 collider;
 			Color color;

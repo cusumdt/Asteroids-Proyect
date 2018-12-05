@@ -16,41 +16,50 @@ namespace GameInit
 		{
 			static float delta_y;
 			static float delta_x;
-			delta_y = player.destRec.y - GetMouseY();
-			delta_x = player.destRec.x - GetMouseX();
-			player.rotation = (atan2(delta_y, delta_x)*RAD2DEG)-90;
-			player.speed.x = sin(player.rotation*DEG2RAD);
-			player.speed.y = cos(player.rotation*DEG2RAD);
-			if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
+			static const short int ANGLE = 90;
+			static const short int MAXVELOCITY = 400;
+			static const short int MINVELOCITY = 200;
+			static const float REDUCVELOCITY = 0.5f;
+			static Vector2 positionMouse;
+			static Vector2 vectorPosition;//vector de la posicion al mouse
+			static Vector2 vPositionNormalized;
+			float modVectorPosition;
+			positionMouse = GetMousePosition();
+			vectorPosition = { positionMouse.x - player.position.x  , positionMouse.y - player.position.y };
+
+			player.rotation = (atan2(vectorPosition.y, vectorPosition.x)*RAD2DEG) + ANGLE;
+			if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON)) 
 			{
-				if (player.acceleration < 400) player.acceleration = 400;
+				modVectorPosition = sqrt(pow(vectorPosition.x, 2) + pow(vectorPosition.y, 2));
+				vPositionNormalized.y = vectorPosition.y / modVectorPosition;
+				vPositionNormalized.x = vectorPosition.x / modVectorPosition;
+				player.acceleration.y += vPositionNormalized.y;
+				player.acceleration.x += vPositionNormalized.x;
 			}
-			else
-			{
-				if (player.acceleration > 200) player.acceleration -= 0.5f;
-				else
-				{
-					player.acceleration = 200;
-				}
-			}
-			player.position.x += (player.speed.x*player.acceleration)* GetFrameTime();
-			player.position.y -= (player.speed.y*player.acceleration)* GetFrameTime();
-			if (player.position.x > screenWidth + shipHeight) 
-			{
-				player.position.x = -(shipHeight);
-			}
-			else if (player.position.x < -(shipHeight))
-			{
-				player.position.x = screenWidth + shipHeight;
-			}
-			if (player.position.y > (screenHeight + shipHeight)) 
+
+			player.position.y += player.acceleration.y* GetFrameTime();
+			player.position.x += player.acceleration.x* GetFrameTime();
+
+			if (player.position.y >(GetScreenHeight() + shipHeight)) 
 			{
 				player.position.y = -(shipHeight);
 			}
-			else if (player.position.y < -(shipHeight))
+
+			else if (player.position.y < -(shipHeight)) 
 			{
-				player.position.y = screenHeight + shipHeight;
+				player.position.y = GetScreenHeight() + shipHeight;
 			}
+
+			if (player.position.x > GetScreenWidth() +shipHeight) 
+			{
+				player.position.x = -(shipHeight);
+			}
+
+			else if (player.position.x < -(shipHeight)) 
+			{
+				player.position.x = GetScreenWidth() + shipHeight;
+			}
+
 		}
 	}
 }

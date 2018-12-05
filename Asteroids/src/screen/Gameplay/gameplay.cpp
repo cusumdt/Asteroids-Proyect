@@ -80,6 +80,7 @@ namespace GameInit
 	static void initShoot(Shoot shoot[]);
 	static void victory();
 	static void defeat();
+	static void restartPlayer();
 	// Initialization
 	//-------------------------------------------- Statics
 	static int checkGame = 1;
@@ -131,7 +132,7 @@ namespace GameInit
 		player.player_texture = LoadTexture("res/Space_Ship.png");
 		player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
 		player.speed = Vector2{ 0, 0 };
-		player.acceleration = 0;
+		player.acceleration = { 0,0 };
 		player.rotation = 0;
 		player.sourceRec = { 0.0f,0.0f,(float)player.player_texture.width,(float)player.player_texture.height };
 		player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
@@ -300,6 +301,7 @@ namespace GameInit
 					for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
 						shoot[i].active = false;
 					}
+					restartPlayer();
 					firstStart = true;
 					initMeteor(meteor);
 					points = INIT_SCORE;
@@ -323,6 +325,7 @@ namespace GameInit
 					for (int i = 0; i < PLAYER_MAX_SHOOTS; i++) {
 						shoot[i].active = false;
 					}
+					restartPlayer();
 					firstStart = true;
 					initMeteor(meteor);
 					points = INIT_SCORE;
@@ -583,6 +586,7 @@ namespace GameInit
 	{
 		if (points >= MAX_POINT)
 		{
+			restartPlayer();
 			firstStart = true;
 			screen = WIN;
 			initMeteor(meteor);
@@ -597,7 +601,7 @@ namespace GameInit
 		defeatStatus = true;
 		if (timeDefeat >= 2)
 		{
-
+			restartPlayer();
 			defeatStatus = false;
 			timeDefeat = 0;
 			initMeteor(meteor);
@@ -625,6 +629,17 @@ namespace GameInit
 		UnloadSound(fxWav2);
 		UnloadSound(fxWav3);
 		UnloadSound(fxWav4);
+	}
+	static void restartPlayer() 
+	{
+		player.position = Vector2{ (float)screenWidth / 2, (float)screenHeight / 2 - shipHeight / 2 };
+		player.speed = Vector2{ 0, 0 };
+		player.acceleration = { 0,0 };
+		player.rotation = 0;
+		player.sourceRec = { 0.0f,0.0f,(float)player.player_texture.width,(float)player.player_texture.height };
+		player.destRec = { player.position.x,player.position.y,(float)player.player_texture.width,(float)player.player_texture.height };
+		player.origin = { (float)player.player_texture.width / 2,(float)player.player_texture.height / 2 };
+		player.collider = Vector3{ player.position.x + sin(player.rotation*DEG2RAD)*(shipHeight / 2.5f), player.position.y - cos(player.rotation*DEG2RAD)*(shipHeight / 2.5f), 12 };
 	}
 }
 
