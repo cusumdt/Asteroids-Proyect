@@ -144,7 +144,7 @@ namespace GameInit
 		{
 			DrawTexture(negativeExit, screenWidth / 2 - exit.width / 2, screenHeight / 2 + exit.height * 3 + 5, WHITE);
 		}
-		DrawText("v1.2", screenWidth / 2 - (MeasureText("v1.1", 25) / 2), screenHeight - screenHeight / 20, 25, BLACK);
+		DrawText("v1.3", screenWidth / 2 - (MeasureText("v1.1", 25) / 2), screenHeight - screenHeight / 20, 25, BLACK);
 		if (settings)
 		{
 			DrawRectangle(screenWidth / 2 - (MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) / 2) - 5, screenHeight - screenHeight / 3, MeasureText(" Player 2: KeyUp -> Up / KeyDown -> Down ", fontSize) + 10, fontSize * 3 + 15, LIGHTGRAY);

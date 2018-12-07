@@ -15,7 +15,7 @@ namespace GameInit
 		void mov_ship()
 		{
 			static const short int ANGLE = 90;
-			static const float velocity = 600.0f;
+			static const float velocity = 0.10f;
 			static Vector2 positionMouse;
 			static Vector2 vectorPosition;//vector de la posicion al mouse
 			static Vector2 vPositionNormalized;
@@ -29,8 +29,8 @@ namespace GameInit
 				modVectorPosition = sqrt(pow(vectorPosition.x, 2) + pow(vectorPosition.y, 2));
 				vPositionNormalized.y = vectorPosition.y / modVectorPosition;
 				vPositionNormalized.x = vectorPosition.x / modVectorPosition;
-				player.acceleration.y += vPositionNormalized.y*velocity*GetFrameTime();
-				player.acceleration.x += vPositionNormalized.x*velocity*GetFrameTime();
+				player.acceleration.y += vPositionNormalized.y*velocity;
+				player.acceleration.x += vPositionNormalized.x*velocity;
 			}
 			
 			player.position.y += player.acceleration.y * GetFrameTime();
