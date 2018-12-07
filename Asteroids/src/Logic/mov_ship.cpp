@@ -14,12 +14,8 @@ namespace GameInit
 	{
 		void mov_ship()
 		{
-			static float delta_y;
-			static float delta_x;
 			static const short int ANGLE = 90;
-			static const short int MAXVELOCITY = 400;
-			static const short int MINVELOCITY = 200;
-			static const float REDUCVELOCITY = 0.5f;
+			static const float velocity = 600.0f;
 			static Vector2 positionMouse;
 			static Vector2 vectorPosition;//vector de la posicion al mouse
 			static Vector2 vPositionNormalized;
@@ -33,12 +29,13 @@ namespace GameInit
 				modVectorPosition = sqrt(pow(vectorPosition.x, 2) + pow(vectorPosition.y, 2));
 				vPositionNormalized.y = vectorPosition.y / modVectorPosition;
 				vPositionNormalized.x = vectorPosition.x / modVectorPosition;
-				player.acceleration.y += vPositionNormalized.y;
-				player.acceleration.x += vPositionNormalized.x;
+				player.acceleration.y += vPositionNormalized.y*velocity*GetFrameTime();
+				player.acceleration.x += vPositionNormalized.x*velocity*GetFrameTime();
 			}
+			
+			player.position.y += player.acceleration.y * GetFrameTime();
+			player.position.x += player.acceleration.x * GetFrameTime();
 
-			player.position.y += player.acceleration.y* GetFrameTime();
-			player.position.x += player.acceleration.x* GetFrameTime();
 
 			if (player.position.y >(GetScreenHeight() + shipHeight)) 
 			{
@@ -59,7 +56,7 @@ namespace GameInit
 			{
 				player.position.x = GetScreenWidth() + shipHeight;
 			}
-
+			std::cout << player.position.x << std::endl;
 		}
 	}
 }
